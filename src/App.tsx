@@ -4,6 +4,7 @@ import { UserProvider } from './UserContext';
 import './App.css';
 import WeeklyCalendar from './WeeklyCalendar';
 
+
 const App: React.FC = () => {
   return (
     <UserProvider>
