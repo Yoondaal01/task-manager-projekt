@@ -3,6 +3,30 @@ body{
   justify-content: center;
 }
 
+.week-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #1E1E1E;
+  margin-bottom: 10px;
+}
+
+.week-navigation .week-arrow {
+  cursor: pointer;
+  color: #87A8D8;
+  font-size: 1.5rem;
+  border: none;
+  background: none;
+  transition: color 0.3s ease;
+}
+
+.week-navigation .week-arrow:hover {
+  color: #4C6FA8;
+}
+
 .weekly-calendar-wrapper {
   font-family: Futura, sans-serif;
   display: flex;

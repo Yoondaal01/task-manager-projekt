@@ -10,7 +10,7 @@ interface Task {
   priority: 'low' | 'medium' | 'high';
   color: 'pink' | 'coral' | 'lavender' | 'teal' | 'yellow' | 'mint';
   date: string;
-  time?: string; // Optional property
+  time?: string; // Optional time property
 }
 
 const WeeklyCalendar: React.FC = () => {
@@ -18,11 +18,15 @@ const WeeklyCalendar: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [modalPosition, setModalPosition] = useState<{ top: number; left: number } | null>(null);
+  const [weekOffset, setWeekOffset] = useState(0);
 
-  const weekDays = ['MAN.', 'TIRS.', 'ONS.', 'TOR.', 'FRE.', 'LØR.', 'SØN.'];
+  const weekDays = [
+    'MAN.', 'TIRS.', 'ONS.', 'TOR.', 'FRE.', 'LØR.', 'SØN.'
+  ];
 
   // Get current week dates
   const today = new Date();
+  today.setDate(today.getDate() + weekOffset * 7);
   const startOfWeek = today.getDate() - today.getDay() + 1;
   const weekDates = Array.from({ length: 7 }, (_, i) => {
     const date = new Date(today);
@@ -69,15 +73,24 @@ const WeeklyCalendar: React.FC = () => {
   };
 
   const handleChange = (field: string, value: string) => {
-    setSelectedTask((prevTask) => (prevTask ? { ...prevTask, [field]: value } : null));
+    setSelectedTask((prevTask) => prevTask ? ({ ...prevTask, [field]: value }) : null);
   };
 
   const handleColorChange = (color: 'pink' | 'coral' | 'lavender' | 'teal' | 'yellow' | 'mint') => {
-    setSelectedTask((prevTask) => (prevTask ? { ...prevTask, color } : null));
+    setSelectedTask((prevTask) => prevTask ? ({ ...prevTask, color }) : null);
+  };
+
+  const handleWeekChange = (direction: 'prev' | 'next') => {
+    setWeekOffset((prevOffset) => direction === 'prev' ? prevOffset - 1 : prevOffset + 1);
   };
 
   return (
     <div className="weekly-calendar-container">
+      <div className="week-navigation">
+        <button className="week-arrow" onClick={() => handleWeekChange('prev')}>&#9664;</button>
+        <h2 className="week-number">Uge {Math.ceil(((weekDates[0].getTime() - new Date(weekDates[0].getFullYear(), 0, 1).getTime()) / 86400000 + new Date(weekDates[0].getFullYear(), 0, 1).getDay() + 1) / 7)}</h2>
+        <button className="week-arrow" onClick={() => handleWeekChange('next')}>&#9654;</button>
+      </div>
       <div className="weekly-calendar-wrapper">
         <div className="weekly-calendar">
           {weekDates.map((date, index) => (
@@ -105,10 +118,7 @@ const WeeklyCalendar: React.FC = () => {
                     </div>
                   ))}
               </div>
-              <div
-                className="add-task-button"
-                onClick={(e) => handleAddTaskButtonClick(date.toISOString().split('T')[0], e)}
-              >
+              <div className="add-task-button" onClick={(e) => handleAddTaskButtonClick(date.toISOString().split('T')[0], e)}>
                 <p>Add Task</p>
                 <img src="src/assets/add-task-icon.png" alt="Add Task" />
               </div>
