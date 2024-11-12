@@ -1,13 +1,13 @@
 import React from 'react';
 import './TaskCard.css'
 
-
 interface TaskCardProps {
   title: string;
   category: string;
   priority: 'low' | 'medium' | 'high';
   color: 'pink' | 'coral' | 'lavender' | 'teal' | 'yellow' | 'mint';
   date: string;
+  time?: string; // Optional time property
   onComplete: () => void;
   onDelete: () => void;
   onChange: (field: string, value: string) => void;
@@ -20,6 +20,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
   priority,
   color,
   date,
+  time,
   onComplete,
   onDelete,
   onChange,
@@ -45,8 +46,24 @@ const TaskCard: React.FC<TaskCardProps> = ({
         />
       </div>
       <div className="task-field">
+        <label>Dato</label>
+        <input
+          type="date"
+          value={date}
+          onChange={(e) => onChange('date', e.target.value)}
+        />
+      </div>
+      <div className="task-field">
+        <label>Tid</label>
+        <input
+          type="time"
+          value={time || ''} // Handle optional time
+          onChange={(e) => onChange('time', e.target.value)}
+        />
+      </div>
+      <div className="task-field">
         <label>Prioritering</label>
-        <select
+        <select className='priority'
           value={priority}
           onChange={(e) => onChange('priority', e.target.value)}
         >
@@ -54,14 +71,6 @@ const TaskCard: React.FC<TaskCardProps> = ({
           <option value="medium">Medium</option>
           <option value="high">High</option>
         </select>
-      </div>
-      <div className="task-field">
-        <label>Dato</label>
-        <input
-          type="date"
-          value={date}
-          onChange={(e) => onChange('date', e.target.value)}
-        />
       </div>
       <div className="task-field">
         <label>Vælg Farve</label>

@@ -13,6 +13,8 @@ interface Task {
   category: string;
   priority: 'low' | 'medium' | 'high';
   color: 'pink' | 'coral' | 'lavender' | 'teal' | 'yellow' | 'mint';
+  time?: string;
+  isComplete: boolean;
 }
 
 // Define the context value type

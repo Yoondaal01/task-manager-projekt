@@ -1,140 +1,175 @@
-.task-card {
-    background-color: #f7fbf2;
-    border-radius: 20px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    position: relative;
-    font-family: 'Futura', sans-serif;
-    border: 2px solid #9CBF7B;
-    
-  }
-  
-  .task-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+body {
+  display: flex;
+  justify-content: center;
+}
 
+.task-card {
+  background-color: #f7fbf2;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  position: relative;
+  font-family: 'Futura', sans-serif;
+  border: 2px solid #9CBF7B;
+}
+
+.task-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.task-card-header h4 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: #1E1E1E;
+  margin-top: 20px;
+}
+
+.close-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #F7B6C2;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 5px;
+}
+
+.close-button:hover {
+  background-color: #f79aab;
+}
+
+.task-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.task-field {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.task-field label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #1E1E1E;
+  font-size: 1rem;
+}
+
+.task-field input, .task-field textarea {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #CACACA;
+  font-family: 'Futura', sans-serif;
+  font-size: 1rem;
+  color: #1E1E1E;
+}
+
+textarea {
+  resize: none;
+  height: 60px;
+}
+
+.color-options {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.color-circle {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 2px solid #f0f0f0;
+  cursor: pointer;
+  transition: border 0.3s ease;
+}
+
+.color-circle.selected {
+  border: 2px solid #9CBF7B;
+}
+
+.add-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #9CBF7B;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-button:hover {
+  background-color: #7FAF6A;
+}
+
+.pink {
+  background-color: #F7B6C2;
+}
+
+.coral {
+  background-color: #F8A488;
+}
+
+.lavender {
+  background-color: #CBB7E1;
+}
+
+.teal {
+  background-color: #7FB7BE;
+}
+
+.yellow {
+  background-color: #F5D56C;
+}
+
+.mint {
+  background-color: #A8DFC1;
+}
+
+.priority {
+  border-radius: 10px;
+  height: 40px;
+  border: 1px solid #a7a7a7;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .task-card {
+    width: 90%;
+    max-width: 320px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    padding: 15px;
+    border-radius: 15px;
   }
-  
+
   .task-card-header h4 {
-    margin: 0;
-    font-weight: 600;
-    font-size: 1.5rem;
-    color: #1E1E1E;
-    margin-top: 20px;
+    font-size: 1.2rem;
   }
-  
-  .close-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #F7B6C2;
-    border: none;
-    border-radius: 10px;
-    font-size: 1rem;
-    font-weight: 600;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-left: 5px;
-  }
-  
-  .close-button:hover {
-    background-color: #f79aab;
-  }
-  
-  .task-card-content {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .task-field {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-   
-  }
-  
+
   .task-field label {
-    font-weight: 600;
-    margin-bottom: 5px;
-    color: #1E1E1E;
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
-  
-  .task-field input, .task-field textarea {
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid #CACACA;
-    font-family: 'Futura', sans-serif;
-    font-size: 1rem;
-    color: #1E1E1E;
+
+  .add-button, .close-button {
+    padding: 8px 15px;
+    font-size: 0.9rem;
   }
-  
-  textarea {
-    resize: none;
-    height: 60px;
-  }
-  
-  .color-options {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
-  }
-  
-  .color-circle {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    border: 2px solid #f0f0f0;
-    cursor: pointer;
-    transition: border 0.3s ease;
-  }
-  
-  .color-circle.selected {
-    border: 2px solid #9CBF7B;
-  }
-  
-  .add-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #9CBF7B;
-    border: none;
-    border-radius: 10px;
-    font-size: 1rem;
-    font-weight: 600;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .add-button:hover {
-    background-color: #7FAF6A;
-  }
-  
-  .pink {
-    background-color: #F7B6C2;
-  }
-  
-  .coral {
-    background-color: #F8A488;
-  }
-  
-  .lavender {
-    background-color: #CBB7E1;
-  }
-  
-  .teal {
-    background-color: #7FB7BE;
-  }
-  
-  .yellow {
-    background-color: #F5D56C;
-  }
-  
-  .mint {
-    background-color: #A8DFC1;
-  }
-  
+}

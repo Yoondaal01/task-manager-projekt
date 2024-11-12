@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
           <p>{dayNames[today.getDay()]}, {today.getDate()} {monthNames[today.getMonth()]} {today.getFullYear()}</p>
         </div>
         <div className="logo">
-          <img src="https://png.pngtree.com/png-vector/20220706/ourmid/pngtree-letter-n-logo-design-png-png-image_5687381.png" alt="Logo" />
+          <img src="https://i.pinimg.com/736x/81/3c/fc/813cfc3f214f8d187bdf5db2e0b3191f.jpg" alt="Logo" />
         </div>
       </div>
     </div>
