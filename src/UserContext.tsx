@@ -10,10 +10,11 @@ interface Task {
   id: number;
   title: string;
   date: string;
-  time?: string; // Make time optional
   category: string;
   priority: 'low' | 'medium' | 'high';
   color: 'pink' | 'coral' | 'lavender' | 'teal' | 'yellow' | 'mint';
+  time?: string;
+  isComplete: boolean;
 }
 
 // Define the context value type

@@ -1,4 +1,4 @@
-body{
+body {
   display: flex;
   justify-content: center;
 }
@@ -7,24 +7,27 @@ body{
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 10px;
-  font-size: 1rem;
-  font-weight: bold;
-  color: #1E1E1E;
-  margin-bottom: 10px;
+  margin: 20px;
+  font-family: 'Futura', sans-serif;
 }
 
-.week-navigation .week-arrow {
-  cursor: pointer;
-  color: #87A8D8;
-  font-size: 1.5rem;
-  border: none;
+.week-arrow {
   background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #7fb7be;
+  cursor: pointer;
   transition: color 0.3s ease;
 }
 
-.week-navigation .week-arrow:hover {
-  color: #4C6FA8;
+.week-arrow:hover {
+  color: #7FAF6A;
+}
+
+.week-number {
+  margin: 0 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
 .weekly-calendar-wrapper {
@@ -45,7 +48,7 @@ body{
 .weekly-calendar {
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;   
+  flex-wrap: wrap;
 }
 
 .day-column {
@@ -73,7 +76,7 @@ body{
 .day-header h3 {
   margin: 5px;
   font-size: 1.2rem;
-  color:#CACACA ;
+  color: #CACACA;
   font-family: Helvetica, sans-serif;
   font-weight: 400;
 }
@@ -90,9 +93,11 @@ body{
   border: 3px solid #9CBF7B; /* Highlighted border for the current day */
   background-color: #F7FBF2; /* Subtle background for highlighting */
 }
+
 .current-day h3 {
   color: #1E1E1E; /* Highlighted text color for the current day */
 }
+
 .current-day p {
   color: #1E1E1E; /* Highlighted text color for the current day */
 }
@@ -169,6 +174,19 @@ body{
   height: 20px;
   margin-left: 5px;
 }
+.task-delete,
+.task-complete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.task-delete img,
+.task-complete img {
+  width: 23px;
+  height: 23px;
+}
 
 /* Responsive Styles */
 @media (max-width: 1024px) { /* Tablet Styles */
@@ -188,25 +206,55 @@ body{
     width: 160px;
     margin: 10px;
   }
+
+  .week-navigation {
+    align-items: center;
+  }
+
+  .week-arrow {
+    font-size: 1.3rem;
+  }
+
+  .week-number {
+    font-size: 1.1rem;
+  }
 }
 
 @media (max-width: 768px) {
   .weekly-calendar-wrapper {
     justify-content: center;
+    min-width: 60vw;
   }
 
   .weekly-calendar {
     flex-direction: column;
     align-items: center;
+    align-content: center;
   }
 
   .day-column {
     width: 100%;
     max-width: none;
   }
+
+  .week-navigation {
+    margin-bottom: 15px;
+  }
+
+  .week-arrow {
+    font-size: 1.2rem;
+  }
+
+  .week-number {
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
+  .weekly-calendar-wrapper{
+    justify-content: center;
+  }
+
   .day-header h3 {
     font-size: 1rem;
   }
@@ -217,5 +265,17 @@ body{
 
   .add-task-button p {
     font-size: 0.9rem;
+  }
+
+  .week-arrow {
+    font-size: 1rem;
+  }
+
+  .week-number {
+    font-size: 0.9rem;
+  }
+
+  .week-navigation {
+    margin-bottom: 10px;
   }
 }

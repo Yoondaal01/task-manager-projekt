@@ -11,6 +11,7 @@ interface Task {
   color: 'pink' | 'coral' | 'lavender' | 'teal' | 'yellow' | 'mint';
   date: string;
   time?: string; // Optional time property
+  isComplete: boolean;
 }
 
 const WeeklyCalendar: React.FC = () => {
@@ -26,6 +27,7 @@ const WeeklyCalendar: React.FC = () => {
 
   // Get current week dates
   const today = new Date();
+  const currentDay = new Date(); // Store the actual current day
   today.setDate(today.getDate() + weekOffset * 7);
   const startOfWeek = today.getDate() - today.getDay() + 1;
   const weekDates = Array.from({ length: 7 }, (_, i) => {
@@ -43,6 +45,7 @@ const WeeklyCalendar: React.FC = () => {
       color: 'pink',
       date,
       time: '',
+      isComplete: false,
     });
     const rect = event.currentTarget.parentElement?.getBoundingClientRect();
     if (rect) {
@@ -72,6 +75,22 @@ const WeeklyCalendar: React.FC = () => {
     }
   };
 
+  const handleDeleteTask = (taskId: number) => {
+    setUserData({
+      ...userData,
+      tasks: userData.tasks.filter((task) => task.id !== taskId),
+    });
+  };
+
+  const handleToggleCompleteTask = (taskId: number) => {
+    setUserData({
+      ...userData,
+      tasks: userData.tasks.map((task) =>
+        task.id === taskId ? { ...task, isComplete: !task.isComplete } : task
+      ),
+    });
+  };
+
   const handleChange = (field: string, value: string) => {
     setSelectedTask((prevTask) => prevTask ? ({ ...prevTask, [field]: value }) : null);
   };
@@ -96,7 +115,7 @@ const WeeklyCalendar: React.FC = () => {
           {weekDates.map((date, index) => (
             <div
               key={index}
-              className={`day-column ${date.toDateString() === today.toDateString() ? 'current-day' : ''}`}
+              className={`day-column ${date.toDateString() === currentDay.toDateString() ? 'current-day' : ''}`}
             >
               <div className="day-header">
                 <p>{date.getDate()}</p>
@@ -109,12 +128,25 @@ const WeeklyCalendar: React.FC = () => {
                     <div
                       key={task.id}
                       className={`task ${task.priority} ${task.color}`}
+                      style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
                       onClick={(e) => handleTaskClick(task, e)}
-                      style={{ width: '100%' }}
                     >
-                      {task.time ? <small className="task-time">{task.time}</small> : null}
-                      <h4>{task.title}</h4>
-                      <p>{task.category}</p>
+                      <div>
+                        {task.time ? <small className="task-time">{task.time}</small> : null}
+                        <h4>{task.title}</h4>
+                        <p>{task.category}</p>
+                      </div>
+                      <div className="task-actions" style={{ marginLeft: 'auto', display: 'flex', gap: '10px' }}>
+                        <button className="task-delete" onClick={(e) => { e.stopPropagation(); handleDeleteTask(task.id); }}>
+                          <img src="src/assets/delete-button.png" alt="Delete" />
+                        </button>
+                        <button className="task-complete" onClick={(e) => { e.stopPropagation(); handleToggleCompleteTask(task.id); }}>
+                          <img
+                            src={task.isComplete ? "src/assets/done-button-active.png" : "src/assets/done-button-not-active.png"}
+                            alt={task.isComplete ? "Complete" : "Incomplete"}
+                          />
+                        </button>
+                      </div>
                     </div>
                   ))}
               </div>
