@@ -12,6 +12,7 @@ interface Task {
   date: string;
   category: string;
   priority: 'low' | 'medium' | 'high';
+  color: 'pink' | 'coral' | 'lavender' | 'teal' | 'yellow' | 'mint';
 }
 
 // Define the context value type
