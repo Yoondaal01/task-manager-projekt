@@ -1,5 +1,6 @@
 import React from 'react';
-import './TaskCard.css';
+import './TaskCard.css'
+
 
 interface TaskCardProps {
   title: string;
@@ -10,6 +11,7 @@ interface TaskCardProps {
   onComplete: () => void;
   onDelete: () => void;
   onChange: (field: string, value: string) => void;
+  onColorChange: (color: 'pink' | 'coral' | 'lavender' | 'teal' | 'yellow' | 'mint') => void;
 }
 
 const TaskCard: React.FC<TaskCardProps> = ({
@@ -21,73 +23,65 @@ const TaskCard: React.FC<TaskCardProps> = ({
   onComplete,
   onDelete,
   onChange,
+  onColorChange,
 }) => {
   return (
-    <div className={`task-card ${priority} ${color}`}>
-      <div className="task-card-header">
-        <h4>Tilføj Task</h4>
-        <button className="close-button" onClick={onDelete}>
-          ✖
-        </button>
+    <div className="task-card">
+      <h2>Tilføj Task</h2>
+      <div className="task-field">
+        <label>Title</label>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => onChange('title', e.target.value)}
+        />
       </div>
-      <div className="task-card-content">
-        <div className="task-field">
-          <label>Title</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => onChange('title', e.target.value)}
-          />
-        </div>
-        <div className="task-field">
-          <label>Kategori</label>
-          <input
-            type="text"
-            value={category}
-            onChange={(e) => onChange('category', e.target.value)}
-          />
-        </div>
-        <div className="task-field">
-          <label>Prioritering</label>
-          <select
-            value={priority}
-            onChange={(e) => onChange('priority', e.target.value)}
-          >
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-          </select>
-        </div>
-        <div className="task-field">
-          <label>Dato</label>
-          <input
-            type="date"
-            value={date}
-            onChange={(e) => onChange('date', e.target.value)}
-          />
-        </div>
-        <div className="task-field">
-          <label>Color</label>
-          <select
-            value={color}
-            onChange={(e) => onChange('color', e.target.value)}
-          >
-            <option value="pink">Pink</option>
-            <option value="coral">Coral</option>
-            <option value="lavender">Lavender</option>
-            <option value="teal">Teal</option>
-            <option value="yellow">Yellow</option>
-            <option value="mint">Mint</option>
-          </select>
-        </div>
-        <div className="task-field">
-          <label>Noter / Mikro task</label>
-          <textarea onChange={(e) => onChange('notes', e.target.value)} />
+      <div className="task-field">
+        <label>Kategori</label>
+        <input
+          type="text"
+          value={category}
+          onChange={(e) => onChange('category', e.target.value)}
+        />
+      </div>
+      <div className="task-field">
+        <label>Prioritering</label>
+        <select
+          value={priority}
+          onChange={(e) => onChange('priority', e.target.value)}
+        >
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+      </div>
+      <div className="task-field">
+        <label>Dato</label>
+        <input
+          type="date"
+          value={date}
+          onChange={(e) => onChange('date', e.target.value)}
+        />
+      </div>
+      <div className="task-field">
+        <label>Vælg Farve</label>
+        <div className="color-circle-container" style={{ display: 'flex', gap: '10px' }}>
+          {['pink', 'coral', 'lavender', 'teal', 'yellow', 'mint'].map(
+            (colorOption) => (
+              <div
+                key={colorOption}
+                className={`color-circle ${color === colorOption ? 'selected' : ''}`}
+                style={{ backgroundColor: colorOption }}
+                onClick={() => onColorChange(colorOption as 'pink' | 'coral' | 'lavender' | 'teal' | 'yellow' | 'mint')}
+              />
+            )
+          )}
         </div>
       </div>
-      <button className="add-button" onClick={onComplete}>
-        Tilføj
-      </button>
+      <div className="task-actions">
+        <button className='add-button' onClick={onComplete}>Tilføj</button>
+        <button className='close-button' onClick={onDelete}>Annuller</button>
+      </div>
     </div>
   );
 };

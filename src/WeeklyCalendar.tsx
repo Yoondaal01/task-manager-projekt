@@ -3,23 +3,27 @@ import { useUser } from './UserContext';
 import './WeeklyCalendar.css';
 import TaskCard from './TaskCard';
 
+interface Task {
+  id: number;
+  title: string;
+  category: string;
+  priority: 'low' | 'medium' | 'high';
+  color: 'pink' | 'coral' | 'lavender' | 'teal' | 'yellow' | 'mint';
+  date: string;
+}
+
 const WeeklyCalendar: React.FC = () => {
   const { userData, setUserData } = useUser();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
-  const [newTask, setNewTask] = useState<{
-    title: string;
-    category: string;
-    priority: 'low' | 'medium' | 'high';
-    color: 'pink' | 'coral' | 'lavender' | 'teal' | 'yellow' | 'mint';
-    date: string;
-  }>({
+  const [newTask, setNewTask] = useState<Omit<Task, 'id'>>({
     title: '',
     category: '',
     priority: 'low',
     color: 'pink',
     date: ''
   });
+  const [modalPosition, setModalPosition] = useState<{ top: number; left: number } | null>(null);
 
   const weekDays = [
     'MAN.', 'TIRS.', 'ONS.', 'TOR.', 'FRE.', 'LØR.', 'SØN.'
@@ -34,14 +38,18 @@ const WeeklyCalendar: React.FC = () => {
     return date;
   });
 
-  const handleAddTaskButtonClick = (date: string) => {
+  const handleAddTaskButtonClick = (date: string, event: React.MouseEvent<HTMLDivElement>) => {
     setSelectedDate(date);
     setNewTask({ ...newTask, date });
+    const rect = event.currentTarget.parentElement?.getBoundingClientRect();
+    if (rect) {
+      setModalPosition({ top: rect.top + window.scrollY, left: rect.right + window.scrollX + 10 });
+    }
     setIsModalOpen(true);
   };
 
   const handleTaskSubmit = () => {
-    const newTaskWithId = { ...newTask, id: Date.now() };
+    const newTaskWithId: Task = { ...newTask, id: Date.now() };
     setUserData({ ...userData, tasks: [...userData.tasks, newTaskWithId] });
     setIsModalOpen(false);
   };
@@ -50,6 +58,13 @@ const WeeklyCalendar: React.FC = () => {
     setNewTask((prevTask) => ({
       ...prevTask,
       [field]: value,
+    }));
+  };
+
+  const handleColorChange = (color: 'pink' | 'coral' | 'lavender' | 'teal' | 'yellow' | 'mint') => {
+    setNewTask((prevTask) => ({
+      ...prevTask,
+      color,
     }));
   };
 
@@ -70,13 +85,13 @@ const WeeklyCalendar: React.FC = () => {
                 {userData.tasks
                   .filter(task => new Date(task.date).toDateString() === date.toDateString())
                   .map(task => (
-                    <div key={task.id} className={`task ${task.priority}`}>
+                    <div key={task.id} className={`task ${task.priority} ${task.color}`}>
                       <h4>{task.title}</h4>
                       <p>{task.category}</p>
                     </div>
                   ))}
               </div>
-              <div className="add-task-button" onClick={() => handleAddTaskButtonClick(date.toISOString().split('T')[0])}>
+              <div className="add-task-button" onClick={(e) => handleAddTaskButtonClick(date.toISOString().split('T')[0], e)}>
                 <p>Add Task</p>
                 <img src="src/assets/add-task-icon.png" alt="Add Task" />
               </div>
@@ -84,18 +99,22 @@ const WeeklyCalendar: React.FC = () => {
           ))}
         </div>
       </div>
-      {isModalOpen && (
-        <div className="modal-overlay">
+      {isModalOpen && modalPosition && (
+        <div
+          className="modal-overlay"
+          style={{ position: 'absolute', top: modalPosition.top, left: modalPosition.left, zIndex: 10 }}
+        >
           <div className="modal-content">
             <TaskCard
               title={newTask.title}
               category={newTask.category}
-              priority={newTask.priority as 'low' | 'medium' | 'high'}
-              color={newTask.color as 'pink' | 'coral' | 'lavender' | 'teal' | 'yellow' | 'mint'}
+              priority={newTask.priority}
+              color={newTask.color}
               date={selectedDate || ''}
-              onComplete={handleTaskSubmit}
+              onComplete={() => handleTaskSubmit()}
               onDelete={() => setIsModalOpen(false)}
-              onChange={handleChange}
+              onChange={(field, value) => handleChange(field, value)}
+              onColorChange={(color) => handleColorChange(color)}
             />
           </div>
         </div>
