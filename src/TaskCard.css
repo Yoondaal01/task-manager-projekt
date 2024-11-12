@@ -54,8 +54,8 @@
     display: flex;
     flex-direction: column;
     margin-top: 20px;
-   
   }
+
   
   .task-field label {
     font-weight: 600;
@@ -138,3 +138,8 @@
     background-color: #A8DFC1;
   }
   
+  .priority{
+    border-radius: 10px;
+    height: 40px;
+    border: 1px solid #a7a7a7;
+  }
