@@ -7,6 +7,7 @@ import OverAllToDo from './OverAllToDo';
 
 
 
+
 const App: React.FC = () => {
   return (
     <UserProvider>
@@ -14,7 +15,8 @@ const App: React.FC = () => {
         <Navbar />
         <OverAllToDo />
         <WeeklyCalendar />
-       
+      
+      
         {/* Other components will go here */}
       </div>
     </UserProvider>
