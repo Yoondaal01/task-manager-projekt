@@ -9,13 +9,14 @@ interface UserData {
 interface Task {
   id: number;
   title: string;
-  date: string;
   category: string;
   priority: 'low' | 'medium' | 'high';
   color: 'pink' | 'coral' | 'lavender' | 'teal' | 'yellow' | 'mint';
+  date: string;
   time?: string;
   isComplete: boolean;
 }
+
 
 // Define the context value type
 interface UserContextProps {

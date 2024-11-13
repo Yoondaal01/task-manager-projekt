@@ -43,6 +43,7 @@ body {
   border-radius: 20px;
   border: 4px solid #9CBF7B;
   margin-top: 10px;
+  margin-bottom: 10vh;
 }
 
 .weekly-calendar {

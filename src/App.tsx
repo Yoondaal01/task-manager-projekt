@@ -6,13 +6,15 @@ import WeeklyCalendar from './WeeklyCalendar';
 
 
 
+
 const App: React.FC = () => {
   return (
     <UserProvider>
       <div className="App">
         <Navbar />
         <WeeklyCalendar />
-       
+      
+      
         {/* Other components will go here */}
       </div>
     </UserProvider>
