@@ -15,7 +15,6 @@ const App: React.FC = () => {
         <WeeklyCalendar />
       
       
-        {/* Other components will go here */}
       </div>
     </UserProvider>
   );

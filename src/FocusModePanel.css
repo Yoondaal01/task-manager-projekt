@@ -1,0 +1,105 @@
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 50;
+  }
+  
+  .focus-mode-panel-wrapper {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 400px;
+    height: 100%;
+    z-index: 100;
+  }
+  
+  .focus-mode-panel {
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    
+  }
+  
+  .close-panel-button {
+    align-self: flex-end;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #f77f77;
+    cursor: pointer;
+    margin-right: 0px;
+  }
+  
+  .filter-sort-options {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 10px;
+    margin-right: 100px;
+  }
+  
+  select, input {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #cacaca;
+  }
+  
+  .tasks-list {
+    flex: 1;
+    overflow-y: auto;
+  }
+  
+  .task-card {
+    background-color: #f7fbf2;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+  }
+  
+  .task-card.pink {
+    background-color: #f7b6c2;
+  }
+  
+  .task-card.coral {
+    background-color: #f8a488;
+  }
+  
+  .task-card.lavender {
+    background-color: #cbb7e1;
+  }
+  
+  .task-card.teal {
+    background-color: #7fb7be;
+  }
+  
+  .task-card.yellow {
+    background-color: #f5d56c;
+  }
+  
+  .task-card.mint {
+    background-color: #a8dfc1;
+  }
+  
+  .task-card h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-right: 20px;
+  }
+  
+  .task-card p {
+    margin: 5px 0;
+    font-size: 1rem;
+  }
+  
