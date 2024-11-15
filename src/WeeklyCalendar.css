@@ -1,7 +1,26 @@
-body {
+.focus-mode-button-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+ 
 }
+
+.focus-mode-button {
+  background-color: #7FAF6A;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.focus-mode-button:hover {
+  background-color: #7FAF6A;
+}
+
 
 .week-navigation {
   display: flex;
@@ -91,16 +110,16 @@ body {
 }
 
 .current-day {
-  border: 3px solid #9CBF7B; /* Highlighted border for the current day */
-  background-color: #F7FBF2; /* Subtle background for highlighting */
+  border: 3px solid #9CBF7B;
+  background-color: #F7FBF2;
 }
 
 .current-day h3 {
-  color: #1E1E1E; /* Highlighted text color for the current day */
+  color: #1E1E1E;
 }
 
 .current-day p {
-  color: #1E1E1E; /* Highlighted text color for the current day */
+  color: #1E1E1E;
 }
 
 .tasks {
@@ -121,30 +140,6 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   width: 100%;
-}
-
-.task.pink {
-  background-color: #f7b6c2; /* Blush Pink */
-}
-
-.task.coral {
-  background-color: #f8a488; /* Peachy Coral */
-}
-
-.task.lavender {
-  background-color: #cbb7e1; /* Lavender Mist */
-}
-
-.task.teal {
-  background-color: #7fb7be; /* Dusty Teal */
-}
-
-.task.yellow {
-  background-color: #f5d56c; /* Mellow Yellow */
-}
-
-.task.mint {
-  background-color: #a8dfc1; /* Cool Mint */
 }
 
 .add-task-button {
@@ -170,113 +165,21 @@ body {
   color: #555;
 }
 
-.add-task-button img {
-  width: 20px;
-  height: 20px;
-  margin-left: 5px;
-}
-.task-delete,
-.task-complete {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
+.task-actions {
+  display: flex;
+  gap: 10px;
 }
 
 .task-delete img,
 .task-complete img {
-  width: 23px;
-  height: 23px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }
 
-/* Responsive Styles */
-@media (max-width: 1024px) { /* Tablet Styles */
-  .weekly-calendar-wrapper {
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
-
-  .weekly-calendar {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-  }
-
-  .day-column {
-    width: 160px;
-    margin: 10px;
-  }
-
-  .week-navigation {
-    align-items: center;
-  }
-
-  .week-arrow {
-    font-size: 1.3rem;
-  }
-
-  .week-number {
-    font-size: 1.1rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .weekly-calendar-wrapper {
-    justify-content: center;
-    min-width: 60vw;
-  }
-
-  .weekly-calendar {
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-  }
-
-  .day-column {
-    width: 100%;
-    max-width: none;
-  }
-
-  .week-navigation {
-    margin-bottom: 15px;
-  }
-
-  .week-arrow {
-    font-size: 1.2rem;
-  }
-
-  .week-number {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .weekly-calendar-wrapper{
-    justify-content: center;
-  }
-
-  .day-header h3 {
-    font-size: 1rem;
-  }
-
-  .day-header p {
-    font-size: 1.2rem;
-  }
-
-  .add-task-button p {
-    font-size: 0.9rem;
-  }
-
-  .week-arrow {
-    font-size: 1rem;
-  }
-
-  .week-number {
-    font-size: 0.9rem;
-  }
-
-  .week-navigation {
-    margin-bottom: 10px;
-  }
+.task-delete,
+.task-complete {
+  background: none;
+  border: none;
+  padding: 0; 
 }

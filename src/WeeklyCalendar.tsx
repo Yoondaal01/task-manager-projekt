@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useUser } from './UserContext';
 import './WeeklyCalendar.css';
 import TaskCard from './TaskCard';
+import FocusModePanel from './FocusModePanel';
 
 interface Task {
   id: number;
@@ -10,24 +11,24 @@ interface Task {
   priority: 'low' | 'medium' | 'high';
   color: 'pink' | 'coral' | 'lavender' | 'teal' | 'yellow' | 'mint';
   date: string;
-  time?: string; // Optional time property
+  time?: string;
   isComplete: boolean;
 }
 
 const WeeklyCalendar: React.FC = () => {
+  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const { userData, setUserData } = useUser();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
-  const [modalPosition, setModalPosition] = useState<{ top: number; left: number } | null>(null);
+  const [isFocusModeOpen, setIsFocusModeOpen] = useState(false);
   const [weekOffset, setWeekOffset] = useState(0);
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalPosition, setModalPosition] = useState<{ top: number; left: number } | null>(null);
 
-  const weekDays = [
-    'MAN.', 'TIRS.', 'ONS.', 'TOR.', 'FRE.', 'LØR.', 'SØN.'
-  ];
+  const weekDays = ['MAN.', 'TIRS.', 'ONS.', 'TOR.', 'FRE.', 'LØR.', 'SØN.'];
 
   // Get current week dates
   const today = new Date();
-  const currentDay = new Date(); // Store the actual current day
+  const currentDay = new Date();
   today.setDate(today.getDate() + weekOffset * 7);
   const startOfWeek = today.getDate() - today.getDay() + 1;
   const weekDates = Array.from({ length: 7 }, (_, i) => {
@@ -36,6 +37,13 @@ const WeeklyCalendar: React.FC = () => {
     return date;
   });
 
+  // Toggle Focus Mode Panel
+  const toggleFocusMode = () => {
+    setIsFocusModeOpen(!isFocusModeOpen);
+    setIsOverlayVisible(!isOverlayVisible);
+  };
+
+  // Function to handle adding a new task
   const handleAddTaskButtonClick = (date: string, event: React.MouseEvent<HTMLDivElement>) => {
     setSelectedTask({
       id: Date.now(),
@@ -54,6 +62,7 @@ const WeeklyCalendar: React.FC = () => {
     setIsModalOpen(true);
   };
 
+  // Function to handle clicking on an existing task
   const handleTaskClick = (task: Task, event: React.MouseEvent<HTMLDivElement>) => {
     setSelectedTask(task);
     const rect = event.currentTarget.parentElement?.getBoundingClientRect();
@@ -63,6 +72,7 @@ const WeeklyCalendar: React.FC = () => {
     setIsModalOpen(true);
   };
 
+  // Function to handle task submission
   const handleTaskSubmit = () => {
     if (selectedTask) {
       setUserData({
@@ -75,13 +85,16 @@ const WeeklyCalendar: React.FC = () => {
     }
   };
 
+  // Function to handle task deletion
   const handleDeleteTask = (taskId: number) => {
     setUserData({
       ...userData,
       tasks: userData.tasks.filter((task) => task.id !== taskId),
     });
+    setIsModalOpen(false);
   };
 
+  // Function to handle completing a task
   const handleToggleCompleteTask = (taskId: number) => {
     setUserData({
       ...userData,
@@ -91,25 +104,39 @@ const WeeklyCalendar: React.FC = () => {
     });
   };
 
+  // Function to handle changes in the task form
   const handleChange = (field: string, value: string) => {
-    setSelectedTask((prevTask) => prevTask ? ({ ...prevTask, [field]: value }) : null);
+    setSelectedTask((prevTask) => (prevTask ? { ...prevTask, [field]: value } : null));
   };
 
+  // Function to handle color change
   const handleColorChange = (color: 'pink' | 'coral' | 'lavender' | 'teal' | 'yellow' | 'mint') => {
-    setSelectedTask((prevTask) => prevTask ? ({ ...prevTask, color }) : null);
-  };
-
-  const handleWeekChange = (direction: 'prev' | 'next') => {
-    setWeekOffset((prevOffset) => direction === 'prev' ? prevOffset - 1 : prevOffset + 1);
+    setSelectedTask((prevTask) => (prevTask ? { ...prevTask, color } : null));
   };
 
   return (
     <div className="weekly-calendar-container">
-      <div className="week-navigation">
-        <button className="week-arrow" onClick={() => handleWeekChange('prev')}>&#9664;</button>
-        <h2 className="week-number">Uge {Math.ceil(((weekDates[0].getTime() - new Date(weekDates[0].getFullYear(), 0, 1).getTime()) / 86400000 + new Date(weekDates[0].getFullYear(), 0, 1).getDay() + 1) / 7)}</h2>
-        <button className="week-arrow" onClick={() => handleWeekChange('next')}>&#9654;</button>
+      {isOverlayVisible && <div className="overlay"></div>}
+      
+      {/* Move the Focus Mode button right after the navbar */}
+      <div className="focus-mode-button-container">
+        <button className="focus-mode-button" onClick={toggleFocusMode}>
+          Focus Mode
+        </button>
       </div>
+
+      <div className="week-navigation">
+        <button className="week-arrow" onClick={() => setWeekOffset(weekOffset - 1)}>
+          &#9664;
+        </button>
+        <h2 className="week-number">
+          Uge {Math.ceil(((weekDates[0].getTime() - new Date(weekDates[0].getFullYear(), 0, 1).getTime()) / 86400000 + new Date(weekDates[0].getFullYear(), 0, 1).getDay() + 1) / 7)}
+        </h2>
+        <button className="week-arrow" onClick={() => setWeekOffset(weekOffset + 1)}>
+          &#9654;
+        </button>
+      </div>
+
       <div className="weekly-calendar-wrapper">
         <div className="weekly-calendar">
           {weekDates.map((date, index) => (
@@ -128,8 +155,8 @@ const WeeklyCalendar: React.FC = () => {
                     <div
                       key={task.id}
                       className={`task ${task.priority} ${task.color}`}
-                      style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
                       onClick={(e) => handleTaskClick(task, e)}
+                      style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
                     >
                       <div>
                         {task.time ? <small className="task-time">{task.time}</small> : null}
@@ -152,12 +179,22 @@ const WeeklyCalendar: React.FC = () => {
               </div>
               <div className="add-task-button" onClick={(e) => handleAddTaskButtonClick(date.toISOString().split('T')[0], e)}>
                 <p>Add Task</p>
-                <img src="src/assets/add-task-icon.png" alt="Add Task" />
               </div>
             </div>
           ))}
         </div>
       </div>
+
+      {isFocusModeOpen && (
+        <div className="focus-mode-panel-wrapper">
+          <FocusModePanel
+            tasks={userData.tasks}
+            closePanel={toggleFocusMode}
+            currentDay={new Date()}
+          />
+        </div>
+      )}
+
       {isModalOpen && modalPosition && selectedTask && (
         <div
           className="modal-overlay"
@@ -172,7 +209,7 @@ const WeeklyCalendar: React.FC = () => {
               date={selectedTask.date}
               time={selectedTask.time || ''}
               onComplete={handleTaskSubmit}
-              onDelete={() => setIsModalOpen(false)}
+              onDelete={() => handleDeleteTask(selectedTask.id)}
               onChange={handleChange}
               onColorChange={handleColorChange}
             />
