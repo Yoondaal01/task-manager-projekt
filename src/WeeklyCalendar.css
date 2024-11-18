@@ -1,9 +1,9 @@
+/* Original Styles */
 .focus-mode-button-container {
   display: flex;
   justify-content: flex-end;
   padding: 10px 20px;
   margin-bottom: 10px;
- 
 }
 
 .focus-mode-button {
@@ -18,15 +18,14 @@
 }
 
 .focus-mode-button:hover {
-  background-color: #7FAF6A;
+  background-color: #6B8E23;
 }
-
 
 .week-navigation {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  margin: 20px;
+  justify-content: center;
+  margin: 20px 10px;
   font-family: 'Futura', sans-serif;
 }
 
@@ -45,8 +44,9 @@
 
 .week-number {
   margin: 0 10px;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: bold;
+  color: #1E1E1E;
 }
 
 .weekly-calendar-wrapper {
@@ -54,37 +54,35 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  min-height: 50vh;
-  min-width: 90vw;
+  width: 100%;
   overflow-x: auto;
-  padding: 10px;
+  padding: 20px;
   background-color: white;
   border-radius: 20px;
   border: 4px solid #9CBF7B;
-  margin-top: 10px;
-  margin-bottom: 10vh;
+  margin-top: 20px;
+  margin-bottom: 40px;
 }
 
 .weekly-calendar {
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  gap: 20px;
+  padding: 10px 0;
+  align-content: center;
 }
 
 .day-column {
-  flex: 1;
-  margin: 0 10px;
+  flex: 0 0 140px; /* Fixed width for each day */
+  margin: 10px;
   background-color: #ffffff;
   border-radius: 20px;
-  padding: 10px;
+  padding: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-  width: 190px;
-  min-width: 100px;
+  min-width: 140px;
   height: auto;
-  margin-bottom: 20px;
 }
 
 .day-header {
@@ -126,14 +124,14 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-bottom: 10px;
-  width: 90%;
+  margin-bottom: 15px;
+  width: 100%;
   align-items: center;
 }
 
 .task {
   background-color: #f0f0f0;
-  border-radius: 20px;
+  border-radius: 15px;
   padding: 10px;
   text-align: left;
   font-weight: 500;
@@ -147,10 +145,10 @@
   justify-content: space-between;
   align-items: center;
   margin-top: auto;
-  padding: 15px;
+  padding: 10px 15px;
   width: 90%;
   background-color: #f0f0f0;
-  border-radius: 20px;
+  border-radius: 15px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -165,7 +163,7 @@
   color: #555;
 }
 
-.add-task-icon{
+.add-task-icon {
   width: 25px;
   height: 25px;
 }
@@ -186,5 +184,106 @@
 .task-complete {
   background: none;
   border: none;
-  padding: 0; 
+  padding: 0;
+}
+
+/* Responsive Styles */
+
+/* Tablet View for Improved Layout */
+@media (max-width: 1500px) {
+  .weekly-calendar-wrapper {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .day-column {
+    width: calc(50% - 20px); /* Two day-columns per row */
+    margin: 10px;
+  }
+
+  .weekly-calendar {
+    flex-wrap: wrap;
+    justify-content: space-around; /* Distribute columns evenly */
+  }
+
+  .add-task-button {
+    padding: 8px 12px;
+    width: 85%;
+    font-size: 0.9rem;
+  }
+
+  .week-navigation {
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+
+  .week-number {
+    font-size: 1.2rem;
+  }
+}
+
+/* Mobile View for One-Column Layout of Days */
+@media (max-width: 768px) {
+  .weekly-calendar {
+    flex-direction: column; /* Stack days in a single column */
+    gap: 15px; /* Add some space between each day */
+  }
+
+  .day-column {
+    width: 90%;
+    max-width: 400px; /* Limit the width for consistency */
+    margin: 0 auto; /* Center align day columns on mobile */
+  }
+
+  .weekly-calendar-wrapper {
+    padding: 10px;
+    margin: 0 auto;
+    width: 100%; /* Make sure wrapper fits the screen */
+    border: none; /* Remove border for mobile for a cleaner look */
+  }
+
+  .week-navigation {
+    justify-content: center;
+    margin-bottom: 15px;
+    width: 100%;
+  }
+
+  .week-arrow {
+    font-size: 1.2rem;
+  }
+
+  .week-number {
+    font-size: 1.2rem;
+  }
+
+  .add-task-button {
+    padding: 8px 15px;
+    font-size: 1rem;
+  }
+}
+
+/* Smaller Mobile Devices */
+@media (max-width: 480px) {
+  .weekly-calendar {
+    gap: 10px; /* Slightly reduce gap between days for smaller devices */
+  }
+
+  .day-column {
+    padding: 10px;
+    width: 95%;
+    max-width: 300px;
+  }
+
+  .week-arrow {
+    font-size: 1rem;
+  }
+
+  .week-number {
+    font-size: 1rem;
+  }
+
+  .add-task-button {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
 }
