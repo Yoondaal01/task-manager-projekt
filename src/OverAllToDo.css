@@ -6,7 +6,11 @@ body {
   }
   
   .OverAllToDo {
+    display: flex;
+    flex-direction: column;
     padding: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
   }
 
   .sectionone{
@@ -216,6 +220,17 @@ body {
     border-color: #c3e6cb;
     opacity: 0.8;
   }
+
+
+.task-buttons .complete-button img {
+  width: 20px;
+  height: 20px;
+}
+
+.task-buttons .delete-button img {
+  width: 20px;
+  height: 20px;
+}
   .color-picker {
     margin-top: 10px;
   }
