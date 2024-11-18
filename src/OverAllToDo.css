@@ -1,0 +1,245 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #000000;
+  }
+  
+  .OverAllToDo {
+    padding: 20px;
+  }
+
+  .sectionone{
+    display: flex;
+  }
+  
+  .add-task-button {
+    padding: 10px 20px;
+    margin: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff00;
+    color: rgb(0, 0, 0);
+    border: 2px solid black;
+    border-radius: 5px;
+  }
+  
+  .add-task-button:hover {
+    background-color: #A8DFC1;
+  }
+  
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    background-color: #f7fbf2;
+    border: 2px solid #9CBF7B;
+    padding: 20px;
+    border-radius: 20px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Futura', sans-serif;
+  }
+
+  .textarea{
+    resize: none;
+    height: 60px;
+
+  }
+  
+  .modal-content input,
+  .modal-content select,
+  .modal-content button,
+  .textarea{
+    display: flex;
+    padding: 10px;
+    margin: 10px;
+  border-radius: 10px;
+  border: 1px solid #CACACA;
+  gap: 20px;
+  font-family: 'Futura', sans-serif;
+  font-size: 1rem;
+  color: #000000;
+  }
+
+ 
+  
+  .modal-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .modal-buttons button {
+    width: 45%;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .modal-buttons button:first-child {
+    background-color: #9CBF7B;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .modal-buttons button:first-child:hover {
+    background-color: #8aa96e;
+  }
+  
+  .modal-buttons button:last-child {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .modal-buttons button:last-child:hover {
+    background-color: #a71d2a;
+  }
+  
+  .filter-box {
+    margin-bottom:20px;
+    padding: 10px;
+  }
+  
+  .filter-box label {
+    font-size: 18px;
+    margin-right: 10px;
+
+  }
+  
+  .filter-box select {
+    font-size: 16px;
+
+  }
+  
+  .task-list {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  .task-item {
+    flex: 0 0 200px; /* Each task takes up fixed width */
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 0;
+    background-color: white;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  .priority {
+    border-radius: 10px;
+    height: 40px;
+    border: 1px solid #a7a7a7;
+  }
+  
+  .task-item h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .task-item p {
+    margin: 10px 0;
+  }
+  
+  .task-item button {
+    cursor: pointer;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .task-item button:hover {
+    background-color: #a71d2a;
+  }
+  
+  /* Smooth scrolling for swipe effect */
+  .task-list {
+    scroll-behavior: smooth;
+  }
+  /* Other styles remain unchanged */
+
+.task-buttons {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+  }
+  
+  .complete-button {
+    cursor: pointer;
+    background-color: #28a745; /* Green */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .complete-button:hover {
+    background-color: #218838;
+  }
+  
+  .delete-button {
+    cursor: pointer;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .delete-button:hover {
+    background-color: #a71d2a;
+  }
+  
+  .task-item.completed {
+    background-color: #d4edda; /* Light green for completed tasks */
+    border-color: #c3e6cb;
+    opacity: 0.8;
+  }
+  .color-picker {
+    margin-top: 10px;
+  }
+  
+  .color-options {
+    display: flex;
+    gap: 10px;
+
+  }
+  
+  .color-swatch {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid #f0f0f0;
+    cursor: pointer;
+    transition: border 0.3s ease;
+  }
+  
+  .color-swatch.selected {
+    border: 2px solid #9CBF7B
+  }
+  
+  .color-swatch:hover {
+    transform: scale(1.2);
+  }
+  
+  
