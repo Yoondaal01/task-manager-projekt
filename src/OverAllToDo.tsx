@@ -118,7 +118,7 @@ const OverAllToDo: React.FC = () => {
       <h1>Vigtigste mål</h1>
 
       {/* Add Task Button */}
-      <button className="add-task-button" onClick={() => setIsFormVisible(true)}>
+      <button className="add-button" onClick={() => setIsFormVisible(true)}>
         Tilføj task
       </button>
       </div>
