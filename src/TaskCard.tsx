@@ -74,9 +74,9 @@ const TaskCard: React.FC<TaskCardProps> = ({
             value={priority}
             onChange={(e) => onChange('priority', e.target.value)}
           >
-            <option value="low">Low</option>
+            <option value="lav">Low</option>
             <option value="medium">Medium</option>
-            <option value="high">High</option>
+            <option value="høj">High</option>
           </select>
         </div>
         <div className="task-field">
