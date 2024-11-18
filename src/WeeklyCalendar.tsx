@@ -177,7 +177,8 @@ const WeeklyCalendar: React.FC = () => {
                     </div>
                   ))}
               </div>
-              <div className="add-task-button" onClick={(e) => handleAddTaskButtonClick(date.toISOString().split('T')[0], e)}>
+              <div className="add-task-button"  onClick={(e) => handleAddTaskButtonClick(date.toISOString().split('T')[0], e)}>
+              <img src="src/assets/add-task-icon.png" alt="Add Task" className="add-task-icon" />
                 <p>Add Task</p>
               </div>
             </div>
