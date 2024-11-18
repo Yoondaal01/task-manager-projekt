@@ -10,7 +10,7 @@ interface Task {
   id: number;
   title: string;
   category: string;
-  priority: 'low' | 'medium' | 'high';
+  priority: 'lav' | 'medium' | 'høj';
   color: 'pink' | 'coral' | 'lavender' | 'teal' | 'yellow' | 'mint';
   date: string;
   time?: string;

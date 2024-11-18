@@ -4,7 +4,7 @@ import './TaskCard.css';
 interface TaskCardProps {
   title: string;
   category: string;
-  priority: 'low' | 'medium' | 'high';
+  priority: 'lav' | 'medium' | 'høj';
   color: 'pink' | 'coral' | 'lavender' | 'teal' | 'yellow' | 'mint';
   date: string;
   time?: string; // Optional time property
@@ -74,9 +74,9 @@ const TaskCard: React.FC<TaskCardProps> = ({
             value={priority}
             onChange={(e) => onChange('priority', e.target.value)}
           >
-            <option value="lav">Low</option>
+            <option value="lav">Lav</option>
             <option value="medium">Medium</option>
-            <option value="høj">High</option>
+            <option value="høj">Høj</option>
           </select>
         </div>
         <div className="task-field">

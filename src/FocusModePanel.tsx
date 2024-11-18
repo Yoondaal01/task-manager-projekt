@@ -5,7 +5,7 @@ interface Task {
   id: number;
   title: string;
   category: string;
-  priority: 'low' | 'medium' | 'high';
+  priority: 'lav' | 'medium' | 'høj';
   color: 'pink' | 'coral' | 'lavender' | 'teal' | 'yellow' | 'mint';
   date: string;
   time?: string;
@@ -48,19 +48,19 @@ const FocusModePanel: React.FC<FocusModePanelProps> = ({ tasks, closePanel, curr
     className="close-icon"
   />
 </button>
-      <h2>Focus Mode: Today's Tasks</h2>
+      <h2>Fokusmode: Dagens opgaver</h2>
 
       <div className="filter-sort-options">
         <select value={filterOption} onChange={(e) => setFilterOption(e.target.value)}>
-          <option value="">Filter by Priority</option>
-          <option value="low">Low</option>
+          <option value="">Filtrer efter prioritet</option>
+          <option value="lav">Lav</option>
           <option value="medium">Medium</option>
-          <option value="high">High</option>
+          <option value="høj">Høj</option>
         </select>
 
         <input
           type="text"
-          placeholder="Search by Category"
+          placeholder="Søg efter kategori"
           value={searchCategory}
           onChange={(e) => setSearchCategory(e.target.value)}
         />
