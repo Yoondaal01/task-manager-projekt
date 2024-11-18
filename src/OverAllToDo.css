@@ -112,6 +112,7 @@ body {
   .filter-box {
     margin-bottom:20px;
     padding: 10px;
+    float: left;
   }
   
   .filter-box label {
