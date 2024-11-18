@@ -114,19 +114,19 @@ const OverAllToDo: React.FC = () => {
 
   return (
     <div className="OverAllToDo">
-        <div className="sectionone">
-      <h1>Vigtigste mål</h1>
+      <div className="sectionone">
+        <h1>Vigtigste mål</h1>
 
-      {/* Add Task Button */}
-      <button className="add-task-button" onClick={() => setIsFormVisible(true)}>
-        Tilføj task
-      </button>
+        {/* Add Task Button */}
+        <button className="overall-add-task-button" onClick={() => setIsFormVisible(true)}>
+          Tilføj task
+        </button>
       </div>
 
       {/* Modal Form */}
       {isFormVisible && (
-        <div className="modal">
-          <div className="modal-content">
+        <div className="overall-modal">
+          <div className="overall-modal-content">
             <h2>Tilføj</h2>
             <label>Title</label>
             <input
@@ -136,7 +136,8 @@ const OverAllToDo: React.FC = () => {
               onChange={(e) => setTitle(e.target.value)}
             />
             <label>Kategori</label>
-            <select className='priority'
+            <select
+              className='priority'
               value={category}
               onChange={(e) => {
                 setCategory(e.target.value);
@@ -152,7 +153,7 @@ const OverAllToDo: React.FC = () => {
                 </option>
               ))}
               <option value="Other">Andet</option>
-            </select><label>Deadline</label>
+            </select>
             {category === "Other" && (
               <input
                 type="text"
@@ -161,6 +162,7 @@ const OverAllToDo: React.FC = () => {
                 onChange={(e) => setCustomCategory(e.target.value)}
               />
             )}
+            <label>Deadline</label>
             <input
               type="date"
               value={deadline}
@@ -177,14 +179,14 @@ const OverAllToDo: React.FC = () => {
             </select>
 
             {/* Color Picker */}
-            <div className="color-picker">
+            <div className="overall-color-picker">
               <label>Vælg Farve</label>
-              <div className="color-options">
+              <div className="overall-color-options">
                 {["#FFCFDA", "#FF8B5A", "#FAF9FF", "#307F80", "#FFFF55"].map(
                   (c) => (
                     <button
                       key={c}
-                      className={`color-swatch ${color === c ? "selected" : ""}`}
+                      className={`overall-color-swatch ${color === c ? "selected" : ""}`}
                       style={{ backgroundColor: c }}
                       onClick={() => setColor(c)}
                     />
@@ -193,7 +195,7 @@ const OverAllToDo: React.FC = () => {
               </div>
             </div>
 
-            <div className="modal-buttons">
+            <div className="overall-modal-buttons">
               <button onClick={addTask}>Tilføj</button>
               <button onClick={() => setIsFormVisible(false)}>Anullere</button>
             </div>
@@ -202,7 +204,7 @@ const OverAllToDo: React.FC = () => {
       )}
 
       {/* Filter Box */}
-      <div className="filter-box">
+      <div className="overall-filter-box">
         <label>Priotere efter</label>
         <select value={filter} onChange={(e) => setFilter(e.target.value)}>
           <option value="Priority">Vigtighed (Høj til Lav)</option>
@@ -212,31 +214,31 @@ const OverAllToDo: React.FC = () => {
       </div>
 
       {/* Task List - Horizontal Scroll */}
-      <div className="task-list">
+      <div className="overall-task-list">
         {filteredTasks.map((task) => (
           <div
             key={task.id}
-            className={`task-item ${task.isCompleted ? "completed" : ""}`}
+            className={`overall-task-item ${task.isCompleted ? "completed" : ""}`}
             style={{ backgroundColor: task.color }}
           >
             <h3>{task.title}</h3>
             <p>Kategori: {task.category}</p>
             <p>Deadline: {task.deadline}</p>
             <p>Vigtighed: {task.priority}</p>
-            <div className="task-buttons">
+            <div className="overall-task-buttons">
               {!task.isCompleted && (
                 <button
-                  className="complete-button"
+                  className="overall-complete-button"
                   onClick={() => markComplete(task.id)}
                 >
                   <img
-                            src={task.isCompleted ? "src/assets/done-button-active.png" : "src/assets/done-button-not-active.png"}
-                            alt={task.isCompleted ? "Complete" : "Incomplete"}
-                          />
+                    src={task.isCompleted ? "src/assets/done-button-active.png" : "src/assets/done-button-not-active.png"}
+                    alt={task.isCompleted ? "Complete" : "Incomplete"}
+                  />
                 </button>
               )}
-              <button className="delete-button" onClick={() => deleteTask(task.id)}>
-              <img src="src/assets/delete-button.png" alt="Delete" />
+              <button className="overall-delete-button" onClick={() => deleteTask(task.id)}>
+                <img src="src/assets/delete-button.png" alt="Delete" />
               </button>
             </div>
           </div>
