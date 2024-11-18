@@ -136,7 +136,7 @@ const OverAllToDo: React.FC = () => {
               onChange={(e) => setTitle(e.target.value)}
             />
             <label>Kategori</label>
-            <select className='priority'
+            <select className='priorityy'
               value={category}
               onChange={(e) => {
                 setCategory(e.target.value);
