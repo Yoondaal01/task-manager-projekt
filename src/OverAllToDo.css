@@ -1,3 +1,11 @@
+.OverAllToDo{
+  display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
+    z-index: 1000; /* Higher value to bring it above other elements */
+}
 .overall-add-task-button {
   padding: 10px 20px;
   margin: 20px;
@@ -7,7 +15,9 @@
   color: rgb(0, 0, 0);
   border: 2px solid black;
   border-radius: 5px;
+  
 }
+.sectionone{ display: flex;}
 
 .overall-add-task-button:hover {
   background-color: #A8DFC1;
@@ -223,3 +233,70 @@
 .overall-color-swatch:hover {
   transform: scale(1.2);
 }
+
+
+  /* General styles for smaller screens */
+@media (max-width: 768px) {
+  .overall-add-task-button {
+    padding: 8px 16px;
+    margin: 10px;
+    font-size: 14px;
+  }
+
+  .overall-modal-content {
+    width: 90%; /* Reduce width to fit smaller screens */
+    padding: 15px;
+  }
+
+  .overall-modal-content input,
+  .overall-modal-content select,
+  .overall-modal-content button,
+  .overall-textarea {
+    font-size: 0.9rem; /* Reduce font size */
+    padding: 8px;
+    margin: 8px;
+  }
+
+  .overall-task-list {
+    gap: 5px;
+    padding: 5px;
+  }
+
+  .overall-task-item {
+    flex: 0 0 150px; /* Adjust task card width */
+    padding: 8px;
+  }
+
+  .overall-task-item h3 {
+    font-size: 1.2rem;
+  }
+
+  .overall-task-item button {
+    padding: 5px 8px;
+    font-size: 0.9rem;
+  }
+
+  .overall-modal-buttons button {
+    width: 48%; /* Make buttons fit side-by-side */
+    font-size: 14px;
+  }
+
+  .overall-filter-box label {
+    font-size: 14px;
+  }
+
+  .overall-filter-box select {
+    font-size: 14px;
+  }
+
+  .priority {
+    height: 30px; /* Adjust height for dropdowns */
+  }
+
+  .overall-color-swatch {
+    width: 20px; /* Smaller swatch size */
+    height: 20px;
+  }
+}
+
+
