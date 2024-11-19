@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import confetti from "canvas-confetti";
 import "./OverAllToDo.css";
 
-type Priority = "High" | "Medium" | "Low";
+type Priority = "Høj" | "Medium" | "Lav";
 
 interface Task {
   id: number;
@@ -62,7 +62,7 @@ const OverAllToDo: React.FC = () => {
     setCustomCategory("");
     setDeadline("");
     setPriority("Medium");
-    setColor("#FFCFDA");
+    setColor("#FFC6D0");
     setIsFormVisible(false);
   };
 
@@ -87,9 +87,9 @@ const OverAllToDo: React.FC = () => {
 
   const sortTasks = () => {
     const priorityOrder: Record<Priority, number> = {
-      High: 1,
+      Høj: 1,
       Medium: 2,
-      Low: 3,
+      Lav: 3,
     };
 
     switch (filter) {
@@ -115,7 +115,7 @@ const OverAllToDo: React.FC = () => {
   return (
     <div className="OverAllToDo">
       <div className="sectionone">
-        <h1>Vigtigste mål</h1>
+        <h1 className="h1OverAlle">Ekstra Mål</h1>
 
         {/* Add Task Button */}
         <button className="overall-add-task-button" onClick={() => setIsFormVisible(true)}>
@@ -157,7 +157,7 @@ const OverAllToDo: React.FC = () => {
             {category === "Other" && (
               <input
                 type="text"
-                placeholder="Custom Category"
+                placeholder="Andet"
                 value={customCategory}
                 onChange={(e) => setCustomCategory(e.target.value)}
               />
@@ -173,16 +173,16 @@ const OverAllToDo: React.FC = () => {
               value={priority}
               onChange={(e) => setPriority(e.target.value as Priority)}
             >
-              <option value="High">Høj</option>
+              <option value="Høj">Høj</option>
               <option value="Medium">Medium</option>
-              <option value="Low">Lav</option>
+              <option value="Lav">Lav</option>
             </select>
 
             {/* Color Picker */}
             <div className="overall-color-picker">
               <label>Vælg Farve</label>
               <div className="overall-color-options">
-                {["#FFCFDA", "#FF8B5A", "#FAF9FF", "#307F80", "#FFFF55"].map(
+                {["#FFC6D0", "#BFEFD1", "#FFE781", "#D6C4EF", "#FEB192", "#90C1C9"].map(
                   (c) => (
                     <button
                       key={c}
@@ -221,10 +221,12 @@ const OverAllToDo: React.FC = () => {
             className={`overall-task-item ${task.isCompleted ? "completed" : ""}`}
             style={{ backgroundColor: task.color }}
           >
-            <h3>{task.title}</h3>
-            <p>Kategori: {task.category}</p>
-            <p>Deadline: {task.deadline}</p>
-            <p>Vigtighed: {task.priority}</p>
+            <div>
+    <h3>{task.title}</h3>
+    <p>{task.category}</p>
+    <p>{task.deadline}</p>
+    <p>{task.priority}</p>
+  </div>
             <div className="overall-task-buttons">
               {!task.isCompleted && (
                 <button
@@ -241,6 +243,7 @@ const OverAllToDo: React.FC = () => {
                 <img src="src/assets/delete-button.png" alt="Delete" />
               </button>
             </div>
+            
           </div>
         ))}
       </div>
