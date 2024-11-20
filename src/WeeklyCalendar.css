@@ -33,7 +33,7 @@
   background: none;
   border: none;
   font-size: 1.5rem;
-  color: #7fb7be;
+  color: #7FAF6A;
   cursor: pointer;
   transition: color 0.3s ease;
 }
@@ -142,6 +142,7 @@
 
 .add-task-button {
   display: flex;
+  flex-direction: row-reverse;
   justify-content: space-between;
   align-items: center;
   margin-top: auto;

@@ -134,27 +134,33 @@ textarea {
 }
 
 .pink {
-  background-color: #F7B6C2;
+  background-color: #E57399;
+  color: #1E1E1E;
 }
 
 .coral {
-  background-color: #F8A488;
+  background-color: #FF7043;
+  color: #1E1E1E;
 }
 
 .lavender {
-  background-color: #CBB7E1;
+  background-color: #9575CD;
+  color: #1E1E1E;
 }
 
 .teal {
-  background-color: #7FB7BE;
+  background-color: #00897B;
+  color: #ffffff;
 }
 
 .yellow {
-  background-color: #F5D56C;
+  background-color: #FFEB3B;
+  color: #1E1E1E;
 }
 
 .mint {
-  background-color: #A8DFC1;
+  background-color: #4CAF50;
+  color: #ffffff;
 }
 
 .priority {
@@ -164,7 +170,60 @@ textarea {
 }
 
 /* Responsive Styles */
+@media (max-width: 1024px) {
+  /* Tablet Styles */
+  .task-card {
+    width: 80%;
+    max-width: 400px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .task-card-header h4 {
+    font-size: 1.4rem;
+  }
+
+  .task-field label {
+    font-size: 1rem;
+  }
+
+  .add-button, .close-button {
+    padding: 10px 18px;
+    font-size: 1rem;
+  }
+
+  .close-icon {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+  .task-card-header h4 {
+    font-size: 1.4rem;
+  }
+
+  .task-field label {
+    font-size: 1rem;
+  }
+
+  .add-button, .close-button {
+    padding: 10px 18px;
+    font-size: 1rem;
+  }
+
+  .close-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+
 @media (max-width: 768px) {
+  /* Mobile Styles */
   .task-card {
     width: 90%;
     max-width: 320px;
@@ -198,3 +257,136 @@ textarea {
     height: 20px;
   }
 }
+
+  .task-card-header h4 {
+    font-size: 1.2rem;
+  }
+
+  .task-field label {
+    font-size: 0.9rem;
+  }
+
+  .add-button, .close-button {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+
+  .close-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+  }
+
+
+
+  .task-card-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    width: 100%;
+  }
+
+  .task-field {
+    flex: 1 1 48%;
+    margin-top: 10px;
+  }
+
+  .task-card-header {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .task-card-header h4 {
+    font-size: 1rem;
+  }
+
+  .task-field label {
+    font-size: 0.8rem;
+  }
+
+  .add-button, .close-button {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+
+  .close-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+
+  .task-card-content {
+    flex: 1 1 50%;
+  }
+
+  .task-card-header {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .task-field {
+    flex: 1 1 45%;
+    margin-top: 10px;
+  }
+
+  .task-card-header h4 {
+    font-size: 1rem;
+  }
+
+  .task-field label {
+    font-size: 0.8rem;
+  }
+
+  .add-button, .close-button {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+
+  .close-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+
+  .task-card-header h4 {
+    font-size: 1rem;
+  }
+
+  .task-field label {
+    font-size: 0.8rem;
+  }
+
+  .add-button, .close-button {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+
+  .close-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+
+  .task-card-header h4 {
+    font-size: 1.2rem;
+  }
+
+  .task-field label {
+    font-size: 0.9rem;
+  }
+
+  .add-button, .close-button {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+
+  .close-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+  }
+

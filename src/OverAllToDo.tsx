@@ -118,25 +118,31 @@ const OverAllToDo: React.FC = () => {
         <h1>Vigtigste mål</h1>
 
         {/* Add Task Button */}
-        <button className="overall-add-task-button" onClick={() => setIsFormVisible(true)}>
+        <button
+          className="overall-add-task-button"
+          onClick={() => setIsFormVisible(true)}
+          aria-label="Tilføj ny opgave"
+        >
           Tilføj task
         </button>
       </div>
 
       {/* Modal Form */}
       {isFormVisible && (
-        <div className="overall-modal">
+        <div className="overall-modal" role="dialog" aria-labelledby="modal-title">
           <div className="overall-modal-content">
-            <h2>Tilføj</h2>
-            <label>Title</label>
+            <h2 id="modal-title">Tilføj Opgave</h2>
+            <label htmlFor="task-title">Title</label>
             <input
+              id="task-title"
               type="text"
-              placeholder=""
               value={title}
               onChange={(e) => setTitle(e.target.value)}
+              aria-required="true"
             />
-            <label>Kategori</label>
+            <label htmlFor="task-category">Kategori</label>
             <select
+              id="task-category"
               className='priority'
               value={category}
               onChange={(e) => {
@@ -146,7 +152,7 @@ const OverAllToDo: React.FC = () => {
                 }
               }}
             >
-              <option value="">Kategori</option>
+              <option value="">Vælg Kategori</option>
               {categories.map((cat, index) => (
                 <option key={index} value={cat}>
                   {cat}
@@ -162,14 +168,17 @@ const OverAllToDo: React.FC = () => {
                 onChange={(e) => setCustomCategory(e.target.value)}
               />
             )}
-            <label>Deadline</label>
+            <label htmlFor="task-deadline">Deadline</label>
             <input
+              id="task-deadline"
               type="date"
               value={deadline}
               onChange={(e) => setDeadline(e.target.value)}
+              aria-required="true"
             />
-            <label>Prioritering</label>
+            <label htmlFor="task-priority">Prioritering</label>
             <select
+              id="task-priority"
               value={priority}
               onChange={(e) => setPriority(e.target.value as Priority)}
             >
@@ -189,6 +198,7 @@ const OverAllToDo: React.FC = () => {
                       className={`overall-color-swatch ${color === c ? "selected" : ""}`}
                       style={{ backgroundColor: c }}
                       onClick={() => setColor(c)}
+                      aria-label={`Vælg farve ${c}`}
                     />
                   )
                 )}
@@ -196,8 +206,8 @@ const OverAllToDo: React.FC = () => {
             </div>
 
             <div className="overall-modal-buttons">
-              <button onClick={addTask}>Tilføj</button>
-              <button onClick={() => setIsFormVisible(false)}>Anullere</button>
+              <button onClick={addTask} aria-label="Tilføj opgave">Tilføj</button>
+              <button onClick={() => setIsFormVisible(false)} aria-label="Annuller opgave">Annullere</button>
             </div>
           </div>
         </div>
@@ -205,8 +215,8 @@ const OverAllToDo: React.FC = () => {
 
       {/* Filter Box */}
       <div className="overall-filter-box">
-        <label>Priotere efter</label>
-        <select value={filter} onChange={(e) => setFilter(e.target.value)}>
+        <label htmlFor="task-filter">Priotere efter</label>
+        <select id="task-filter" value={filter} onChange={(e) => setFilter(e.target.value)}>
           <option value="Priority">Vigtighed (Høj til Lav)</option>
           <option value="Deadline">Deadline (Snarest først)</option>
           <option value="Category">Kategori (A-Z)</option>
@@ -214,12 +224,14 @@ const OverAllToDo: React.FC = () => {
       </div>
 
       {/* Task List - Horizontal Scroll */}
-      <div className="overall-task-list">
+      <div className="overall-task-list" tabIndex={0} role="list">
         {filteredTasks.map((task) => (
           <div
             key={task.id}
             className={`overall-task-item ${task.isCompleted ? "completed" : ""}`}
             style={{ backgroundColor: task.color }}
+            tabIndex={0}
+            aria-label={`Opgave: ${task.title}, Kategori: ${task.category}, Deadline: ${task.deadline}, Vigtighed: ${task.priority}`}
           >
             <h3>{task.title}</h3>
             <p>Kategori: {task.category}</p>
@@ -230,6 +242,7 @@ const OverAllToDo: React.FC = () => {
                 <button
                   className="overall-complete-button"
                   onClick={() => markComplete(task.id)}
+                  aria-label="Markér opgave som fuldført"
                 >
                   <img
                     src={task.isCompleted ? "src/assets/done-button-active.png" : "src/assets/done-button-not-active.png"}
@@ -237,7 +250,11 @@ const OverAllToDo: React.FC = () => {
                   />
                 </button>
               )}
-              <button className="overall-delete-button" onClick={() => deleteTask(task.id)}>
+              <button
+                className="overall-delete-button"
+                onClick={() => deleteTask(task.id)}
+                aria-label="Slet opgave"
+              >
                 <img src="src/assets/delete-button.png" alt="Delete" />
               </button>
             </div>
