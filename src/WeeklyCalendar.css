@@ -7,18 +7,21 @@
 }
 
 .focus-mode-button {
-  background-color: #7FAF6A;
-  color: #ffffff;
+  font-family: Futura, sans-serif;
+  background-color: #A8DFC1;
+  color: #1E1E1E;
   border: none;
   padding: 10px 20px;
   border-radius: 10px;
   cursor: pointer;
+  font-weight: 600;
+  font-size: 1 rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease;
 }
 
 .focus-mode-button:hover {
-  background-color: #6B8E23;
+  background-color: #9CBF7B;
 }
 
 .week-navigation {
@@ -33,13 +36,13 @@
   background: none;
   border: none;
   font-size: 1.5rem;
-  color: #7FAF6A;
+  color: #9CBF7B;
   cursor: pointer;
   transition: color 0.3s ease;
 }
 
 .week-arrow:hover {
-  color: #7FAF6A;
+  color: #9CBF7B;
 }
 
 .week-number {
@@ -119,6 +122,13 @@
 .current-day p {
   color: #1E1E1E;
 }
+.task-card{
+transform: 0;
+top: 0;
+left: 0;
+}
+
+
 
 .tasks {
   display: flex;
@@ -191,7 +201,7 @@
 /* Responsive Styles */
 
 /* Tablet View for Improved Layout */
-@media (max-width: 1500px) {
+@media (max-width: 1350px) {
   .weekly-calendar-wrapper {
     width: 95%;
     padding: 15px;
@@ -221,6 +231,12 @@
   .week-number {
     font-size: 1.2rem;
   }
+  .task-card{
+    transform: 0;
+    top: 0;
+    left: 0;
+    position: relative;
+    }
 }
 
 /* Mobile View for One-Column Layout of Days */
