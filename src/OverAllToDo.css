@@ -1,336 +1,244 @@
-
-.OverAllToDo{
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  padding-left: 50px;
-  padding-right: 50px;
-  width: 100%;
-}
-.overall-add-task-button {
-  padding: 10px 20px;
-  margin: 20px;
-  font-size: 16px;
-  cursor: pointer;
-  background-color: #007bff00;
-  color: rgb(0, 0, 0);
-  border: 2px solid black;
-  border-radius: 5px;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #000000;
+  }
   
-}
-.sectionone{ display: flex;}
+  .OverAllToDo {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
 
-.overall-add-task-button:hover {
-  background-color: #c3c4c3;
-}
-
-.overall-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.overall-modal-content {
-  display: flex;
-  flex-direction: column;
-  background-color: #f7fbf2;
-  border: 2px solid #9CBF7B;
-  padding: 20px;
-  border-radius: 20px;
-  width: 380px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-family: 'Futura', sans-serif;
-}
-
-.overall-textarea {
-  resize: none;
-  height: 60px;
-}
-
-.overall-modal-content input,
-.overall-modal-content select,
-.overall-modal-content button,
-.overall-textarea {
-  display: flex;
-  padding: 18px;
-  margin: 10px;
-  border-radius: 10px;
-  border: 1px solid #CACACA;
-  gap: 20px;
-  font-family: 'Futura', sans-serif;
-  font-size: 1rem;
-  color: #000000;
-}
-
-.overall-modal-buttons {
-  display: flex;
-  justify-content: space-between;
-  
-}
-
-.overall-modal-buttons button {
-  display: flex;
-  justify-content: center;
-  width: 45%;
-  padding: 10px;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.overall-modal-buttons button:first-child {
-  background-color: #9CBF7B;
-  color: white;
-  border: none;
-  border-radius: 5px;
-}
-
-.overall-modal-buttons button:first-child:hover {
-  background-color: #8aa96e;
-}
-
-.overall-modal-buttons button:last-child {
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 5px;
-}
-
-.overall-modal-buttons button:last-child:hover {
-  background-color: #a71d2a;
-}
-
-.overall-filter-box {
-  margin-bottom: 20px;
-  padding: 10px;
-}
-
-.overall-filter-box label {
-  font-size: 18px;
-  margin-right: 10px;
-}
-
-.overall-filter-box select {
-  font-size: 16px;
-}
-
-.overall-task-list {
-  display: flex;
-  overflow-x: auto;
-  gap: 10px;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-.overall-task-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex: 0 0 250px; /* Each task takes up fixed width */
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin: 0;
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-/* Style the dropdown */
-select {
-  appearance: none; /* Removes default styling */
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  border: 2px solid #000000;
-  border-radius: 10px;
-  padding: 10px;
-  font-size: 16px;
-  font-family: 'Futura', sans-serif;
-  color: #000000;
-  cursor: pointer;
-  outline: none;
-  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="20" height="20"  class="bi bi-chevron-down" viewBox="0 0 16 16"%3E%3Cpath fill-rule="evenodd" d="M1.5 6.5l6 6 6-6-.707-.707L8 11.293 2.207 5.793 1.5 6.5z"/%3E%3C/svg%3E');
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 20px 20px;
-}
-
-
-
-/* Optional: Style options within the dropdown */
-select option {
-  font-family: 'Futura', sans-serif;
-  font-size: 16px;
-  color: #000000;
-}
-
-.priority {
-  border-radius: 10px;
-  height: 40px;
-  border: 1px solid #a7a7a700;
-}
-
-
-.overall-task-item p {
-  margin: 10px 0;
-  padding-right: 10px; /* Space between text and button */
-  flex-grow: 1; /* Allow text to take up remaining space */
-}
-
-.overall-task-item button {
-  cursor: pointer;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-}
-
-
-
-
-/* Smooth scrolling for swipe effect */
-.overall-task-list {
-  scroll-behavior: smooth;
-  overflow-x: auto;
-}
-
-/* Other styles remain unchanged */
-
-
-
-.overall-task-buttons {
-  display: flex;
-  gap: 5px;
-  justify-content: center;
-}
-
-
-.overall-complete-button:hover, .overall-delete-button:hover {
-  transform: scale(1.2);
-}
-
-.overall-delete-button, .overall-complete-button {
-  cursor: pointer;
-  background: none;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-}
-
-.overall-delete-button img,.overall-complete-button img {
-  width: 28px;
-  height: 28px;
-  cursor: pointer;
-}
-
-.overall-task-item.completed {
-  background-color: #d4edda; /* Light green for completed tasks */
-  border-color: #c3e6cb;
-  opacity: 0.8;
-}
-
-.overall-color-picker {
-  margin-top: 10px;
-}
-
-.overall-color-options {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-.overall-color-swatch {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  border: 2px solid #f0f0f0;
-  cursor: pointer;
-  transition: border 0.3s ease;
-}
-
-.overall-color-swatch.selected {
-  border: 2px solid #9CBF7B;
-}
-
-.overall-color-swatch:hover {
-  transform: scale(1.2);
-}
-
-
-  /* General styles for smaller screens */
-@media (max-width: 900px) {
-
-  .h1OverAlle{
-    font-size: 24px;
+  .sectionone{
+    display: flex;
   }
   .overall-add-task-button {
-    padding: 6px 8px;
+    padding: 10px 20px;
     margin: 20px;
     font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff00;
+    color: rgb(0, 0, 0);
+    border: 2px solid black;
+    border-radius: 5px;
   }
-
+  
+  .overall-add-task-button:hover {
+    background-color: #A8DFC1;
+  }
+  
+  .overall-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
   .overall-modal-content {
-    width: 80%; /* Reduce width to fit smaller screens */
-    padding: 40px;
-    margin: 40px;
+    display: flex;
+    flex-direction: column;
+    background-color: #f7fbf2;
+    border: 2px solid #9CBF7B;
+    padding: 20px;
+    border-radius: 20px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Futura', sans-serif;
   }
-
+  
+  .overall-textarea {
+    resize: none;
+    height: 60px;
+  }
+  
   .overall-modal-content input,
   .overall-modal-content select,
   .overall-modal-content button,
   .overall-textarea {
-    font-size: 0.9rem; /* Reduce font size */
-    padding: 12px;
-    margin: 8px;
-  }
-
-  .overall-task-list {
-    gap: 5px;
-    padding: 5px;
-  }
-
-  .overall-task-item {
     display: flex;
-    flex-direction: column;
-    flex: 0 0 150px; /* Adjust task card width */
-    padding: 8px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    border: 1px solid #CACACA;
+    gap: 20px;
+    font-family: 'Futura', sans-serif;
+    font-size: 1rem;
+    color: #000000;
   }
-
-  .overall-task-item h3 {
-    font-size: 20px;
+  
+  .overall-modal-buttons {
+    display: flex;
+    justify-content: space-between;
   }
-
-  .overall-task-item button {
-    padding: 5px 8px;
-    font-size: 0.9rem;
-  }
-
+  
   .overall-modal-buttons button {
-    width: 48%; /* Make buttons fit side-by-side */
+    width: 45%;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .overall-modal-buttons button:first-child {
+    background-color: #9CBF7B;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .overall-modal-buttons button:first-child:hover {
+    background-color: #8aa96e;
+  }
+  
+  .overall-modal-buttons button:last-child {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .overall-modal-buttons button:last-child:hover {
+    background-color: #a71d2a;
+  }
+  
+  .overall-filter-box {
+    margin-bottom: 20px;
+    padding: 10px;
+  }
+  
+  .overall-filter-box label {
+    font-size: 18px;
+    margin-right: 10px;
+  }
+  
+  .overall-filter-box select {
     font-size: 16px;
   }
-
-  .overall-filter-box label {
-    font-size: 20px;
-
+  
+  .overall-task-list {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
   }
-  .overall-filter-box select {
-    font-size: 12px;
+  
+  .overall-task-item {
+    flex: 0 0 200px; /* Each task takes up fixed width */
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 0;
+    background-color: white;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
-
+  
   .priority {
-    height: 30px; /* Adjust height for dropdowns */
+    border-radius: 10px;
+    height: 40px;
+    border: 1px solid #a7a7a7;
   }
-
+  
+  .overall-task-item h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .overall-task-item p {
+    margin: 10px 0;
+  }
+  
+  .overall-task-item button {
+    cursor: pointer;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .overall-task-item button:hover {
+    background-color: #a71d2a;
+  }
+  
+  /* Smooth scrolling for swipe effect */
+  .overall-task-list {
+    scroll-behavior: smooth;
+  }
+  
+  /* Other styles remain unchanged */
+  
+  .overall-task-buttons {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+  }
+  
+  .overall-complete-button {
+    cursor: pointer;
+    background-color: #28a745; /* Green */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .overall-complete-button:hover {
+    background-color: #218838;
+  }
+  
+  .overall-delete-button {
+    cursor: pointer;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .overall-delete-button:hover {
+    background-color: #a71d2a;
+  }
+  
+  .overall-task-item.completed {
+    background-color: #d4edda; /* Light green for completed tasks */
+    border-color: #c3e6cb;
+    opacity: 0.8;
+  }
+  
+  .overall-color-picker {
+    margin-top: 10px;
+  }
+  
+  .overall-color-options {
+    display: flex;
+    gap: 10px;
+  }
+  
   .overall-color-swatch {
-    width: 30px; /* Smaller swatch size */
-    height: 30px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid #f0f0f0;
+    cursor: pointer;
+    transition: border 0.3s ease;
   }
-}
-
-
+  
+  .overall-color-swatch.selected {
+    border: 2px solid #9CBF7B;
+  }
+  
+  .overall-color-swatch:hover {
+    transform: scale(1.2);
+  }
+  
+  

@@ -5,7 +5,7 @@ interface Task {
   id: number;
   title: string;
   category: string;
-  priority: 'low' | 'medium' | 'high';
+  priority: 'lav' | 'medium' | 'høj';
   color: 'pink' | 'coral' | 'lavender' | 'teal' | 'yellow' | 'mint';
   date: string;
   time?: string;
@@ -39,40 +39,66 @@ const FocusModePanel: React.FC<FocusModePanelProps> = ({ tasks, closePanel, curr
     );
   }
 
+  // Handle keyboard accessibility for closing the panel
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      closePanel();
+    }
+  };
+
   return (
     <div className="focus-mode-panel">
-      <button className="close-panel-button" onClick={closePanel}>
-  <img
-    src="src/assets/close-icon.png"  // Replace with the actual path to your icon
-    alt="Close"
-    className="close-icon"
-  />
-</button>
-      <h2>Focus Mode: Today's Tasks</h2>
+      <button
+        className="close-panel-button"
+        onClick={closePanel}
+        onKeyDown={handleKeyDown}
+        aria-label="Luk panel"
+      >
+        <img
+          src="src/assets/close-icon.png" // Replace with the actual path to your icon
+          alt="Luk"
+          className="close-icon"
+        />
+      </button>
+      <h2>Fokusmode: Dagens opgaver</h2>
 
       <div className="filter-sort-options">
-        <select value={filterOption} onChange={(e) => setFilterOption(e.target.value)}>
-          <option value="">Filter by Priority</option>
-          <option value="low">Low</option>
+        <label htmlFor="filter-priority" className="visually-hidden">Filtrer efter prioritet</label>
+        <select
+          id="filter-priority"
+          value={filterOption}
+          onChange={(e) => setFilterOption(e.target.value)}
+          aria-label="Filtrer efter prioritet"
+        >
+          <option value="">Filtrer efter prioritet</option>
+          <option value="lav">Lav</option>
           <option value="medium">Medium</option>
-          <option value="high">High</option>
+          <option value="høj">Høj</option>
         </select>
 
+        <label htmlFor="search-category" className="visually-hidden">Søg efter kategori</label>
         <input
+          id="search-category"
           type="text"
-          placeholder="Search by Category"
+          placeholder="Søg efter kategori"
           value={searchCategory}
           onChange={(e) => setSearchCategory(e.target.value)}
+          aria-label="Søg efter kategori"
         />
       </div>
 
       <div className="tasks-list">
         {todayTasks.map((task) => (
-          <div key={task.id} className={`task-card ${task.color}`}>
+          <div
+            key={task.id}
+            className={`task-card ${task.color}`}
+            tabIndex={0}
+            aria-label={`Opgave: ${task.title}, Kategori: ${task.category}, Prioritet: ${task.priority}`}
+          >
             <h3>{task.title}</h3>
-            <p>Category: {task.category}</p>
-            <p>Priority: {task.priority}</p>
-            {task.time && <p>Time: {task.time}</p>}
+            <p>Kategori: {task.category}</p>
+            <p>Prioritet: {task.priority}</p>
+            {task.time && <p>Tid: {task.time}</p>}
           </div>
         ))}
       </div>

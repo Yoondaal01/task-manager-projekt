@@ -8,7 +8,7 @@ interface Task {
   id: number;
   title: string;
   category: string;
-  priority: 'low' | 'medium' | 'high';
+  priority: 'lav' | 'medium' | 'høj';
   color: 'pink' | 'coral' | 'lavender' | 'teal' | 'yellow' | 'mint';
   date: string;
   time?: string;
@@ -49,7 +49,7 @@ const WeeklyCalendar: React.FC = () => {
       id: Date.now(),
       title: '',
       category: '',
-      priority: 'low',
+      priority: 'lav',
       color: 'pink',
       date,
       time: '',
@@ -116,23 +116,35 @@ const WeeklyCalendar: React.FC = () => {
 
   return (
     <div className="weekly-calendar-container">
-      {isOverlayVisible && <div className="overlay"></div>}
+      {isOverlayVisible && <div className="overlay" aria-hidden="true"></div>}
       
       {/* Move the Focus Mode button right after the navbar */}
       <div className="focus-mode-button-container">
-        <button className="focus-mode-button" onClick={toggleFocusMode}>
-          Focus Mode
+        <button
+          className="focus-mode-button"
+          onClick={toggleFocusMode}
+          aria-label="Aktiver Fokus Mode"
+        >
+          Fokus Mode
         </button>
       </div>
 
       <div className="week-navigation">
-        <button className="week-arrow" onClick={() => setWeekOffset(weekOffset - 1)}>
+        <button
+          className="week-arrow"
+          onClick={() => setWeekOffset(weekOffset - 1)}
+          aria-label="Forrige uge"
+        >
           &#9664;
         </button>
         <h2 className="week-number">
           Uge {Math.ceil(((weekDates[0].getTime() - new Date(weekDates[0].getFullYear(), 0, 1).getTime()) / 86400000 + new Date(weekDates[0].getFullYear(), 0, 1).getDay() + 1) / 7)}
         </h2>
-        <button className="week-arrow" onClick={() => setWeekOffset(weekOffset + 1)}>
+        <button
+          className="week-arrow"
+          onClick={() => setWeekOffset(weekOffset + 1)}
+          aria-label="Næste uge"
+        >
           &#9654;
         </button>
       </div>
@@ -143,8 +155,10 @@ const WeeklyCalendar: React.FC = () => {
             <div
               key={index}
               className={`day-column ${date.toDateString() === currentDay.toDateString() ? 'current-day' : ''}`}
+              role="region"
+              aria-labelledby={`day-${index}`}
             >
-              <div className="day-header">
+              <div className="day-header" id={`day-${index}`}>
                 <p>{date.getDate()}</p>
                 <h3>{weekDays[index]}</h3>
               </div>
@@ -156,7 +170,15 @@ const WeeklyCalendar: React.FC = () => {
                       key={task.id}
                       className={`task ${task.priority} ${task.color}`}
                       onClick={(e) => handleTaskClick(task, e)}
+                      tabIndex={0}
+                      role="button"
+                      aria-label={`Opgave: ${task.title}, Kategori: ${task.category}, Prioritet: ${task.priority}`}
                       style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+                      onKeyDown={(e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    handleTaskClick(task, e as unknown as React.MouseEvent<HTMLDivElement>);
+  }
+}}
                     >
                       <div>
                         {task.time ? <small className="task-time">{task.time}</small> : null}
@@ -164,22 +186,30 @@ const WeeklyCalendar: React.FC = () => {
                         <p>{task.category}</p>
                       </div>
                       <div className="task-actions" style={{ marginLeft: 'auto', display: 'flex', gap: '10px' }}>
-                        <button className="task-delete" onClick={(e) => { e.stopPropagation(); handleDeleteTask(task.id); }}>
-                          <img src="src/assets/delete-button.png" alt="Delete" />
+                        <button
+                          className="task-delete"
+                          onClick={(e) => { e.stopPropagation(); handleDeleteTask(task.id); }}
+                          aria-label="Slet opgave"
+                        >
+                          <img src="src/assets/delete-button.png" alt="Slet" />
                         </button>
-                        <button className="task-complete" onClick={(e) => { e.stopPropagation(); handleToggleCompleteTask(task.id); }}>
+                        <button
+                          className="task-complete"
+                          onClick={(e) => { e.stopPropagation(); handleToggleCompleteTask(task.id); }}
+                          aria-label={task.isComplete ? "Markér som ikke fuldført" : "Markér som fuldført"}
+                        >
                           <img
                             src={task.isComplete ? "src/assets/done-button-active.png" : "src/assets/done-button-not-active.png"}
-                            alt={task.isComplete ? "Complete" : "Incomplete"}
+                            alt={task.isComplete ? "Fuldført" : "Ikke fuldført"}
                           />
                         </button>
                       </div>
                     </div>
                   ))}
               </div>
-              <div className="add-task-button"  onClick={(e) => handleAddTaskButtonClick(date.toISOString().split('T')[0], e)}>
-              <img src="src/assets/add-task-icon.png" alt="Add Task" className="add-task-icon" />
-                <p>Add Task</p>
+              <div className="add-task-button" onClick={(e) => handleAddTaskButtonClick(date.toISOString().split('T')[0], e)}>
+                <img src="src/assets/add-task-icon.png" alt="Tilføj Opgave" className="add-task-icon" />
+                <p>Tilføj Task</p>
               </div>
             </div>
           ))}

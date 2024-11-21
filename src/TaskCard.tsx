@@ -4,7 +4,7 @@ import './TaskCard.css';
 interface TaskCardProps {
   title: string;
   category: string;
-  priority: 'low' | 'medium' | 'high';
+  priority: 'lav' | 'medium' | 'høj';
   color: 'pink' | 'coral' | 'lavender' | 'teal' | 'yellow' | 'mint';
   date: string;
   time?: string; // Optional time property
@@ -27,56 +27,68 @@ const TaskCard: React.FC<TaskCardProps> = ({
   onColorChange,
 }) => {
   return (
-    <div className="task-card">
+    <div className="task-card" role="form" aria-labelledby="task-card-title">
       <img
         src="src/assets/close-icon.png" // Replace with the actual path to your PNG image
-        alt="Close"
+        alt="Luk"
         className="close-icon"
         onClick={onDelete}
+        tabIndex={0}
+        aria-label="Slet opgave"
+        onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && onDelete()}
       />
-      <h2>Tilføj Task</h2>
+      <h2 id="task-card-title">Tilføj Task</h2>
       <div className="task-card-content">
         <div className="task-field">
-          <label>Title</label>
+          <label htmlFor="task-title">Titel</label>
           <input
+            id="task-title"
             type="text"
             value={title}
             onChange={(e) => onChange('title', e.target.value)}
+            aria-required="true"
           />
         </div>
         <div className="task-field">
-          <label>Kategori</label>
+          <label htmlFor="task-category">Kategori</label>
           <input
+            id="task-category"
             type="text"
             value={category}
             onChange={(e) => onChange('category', e.target.value)}
+            aria-required="true"
           />
         </div>
         <div className="task-field">
-          <label>Dato</label>
+          <label htmlFor="task-date">Dato</label>
           <input
+            id="task-date"
             type="date"
             value={date}
             onChange={(e) => onChange('date', e.target.value)}
+            aria-required="true"
           />
         </div>
         <div className="task-field">
-          <label>Tid</label>
+          <label htmlFor="task-time">Tid</label>
           <input
+            id="task-time"
             type="time"
             value={time || ''} // Handle optional time
             onChange={(e) => onChange('time', e.target.value)}
           />
         </div>
         <div className="task-field">
-          <label>Prioritering</label>
-          <select className='priority'
+          <label htmlFor="task-priority">Prioritering</label>
+          <select
+            id="task-priority"
+            className='priority'
             value={priority}
             onChange={(e) => onChange('priority', e.target.value)}
           >
-            <option value="low">Low</option>
+            <option value="lav">Lav</option>
             <option value="medium">Medium</option>
-            <option value="high">High</option>
+            <option value="høj">Høj</option>
           </select>
         </div>
         <div className="task-field">
@@ -89,6 +101,10 @@ const TaskCard: React.FC<TaskCardProps> = ({
                   className={`color-circle ${color === colorOption ? 'selected' : ''}`}
                   style={{ backgroundColor: colorOption }}
                   onClick={() => onColorChange(colorOption as 'pink' | 'coral' | 'lavender' | 'teal' | 'yellow' | 'mint')}
+                  tabIndex={0}
+                  role="button"
+                  aria-label={`Vælg farve ${colorOption}`}
+                  onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && onColorChange(colorOption as 'pink' | 'coral' | 'lavender' | 'teal' | 'yellow' | 'mint')}
                 />
               )
             )}
@@ -96,8 +112,8 @@ const TaskCard: React.FC<TaskCardProps> = ({
         </div>
       </div>
       <div className="task-actions">
-        <button className='add-button' onClick={onComplete}>Tilføj</button>
-        <button className='close-button' onClick={onDelete}>Annuller</button>
+        <button className='add-button' onClick={onComplete} aria-label="Tilføj opgave">Tilføj</button>
+        <button className='close-button' onClick={onDelete} aria-label="Annuller opgave">Annuller</button>
       </div>
     </div>
   );
