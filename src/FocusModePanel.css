@@ -76,7 +76,7 @@ border: 0 !important;
     padding: 15px;
     margin-bottom: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: none;
+    
     
   }
   
@@ -116,11 +116,4 @@ border: 0 !important;
     font-size: 1rem;
   }
   
-  @media (max-width: 1350px) {
-    .task-card{
-      position: relative;
-      top: 0%;
-      left: 0%;
-      transform: translate(0%, 0%);
-      }
-  }
+  
