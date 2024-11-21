@@ -1,20 +1,22 @@
 import React, { useState } from "react";
 import confetti from "canvas-confetti";
 import "./OverAllToDo.css";
-
+// Definerer prioriteringsniveauer som en TypeScript type
 type Priority = "Høj" | "Medium" | "Lav";
 
+// Interface for at strukturere task-data
 interface Task {
   id: number;
   title: string;
   category: string;
   deadline: string;
   priority: Priority;
-  color: string;
+  color: string;ba
   isCompleted: boolean;
 }
 
 const OverAllToDo: React.FC = () => {
+  // States til opbevaring af opgave- og UI-relateret data
   const [tasks, setTasks] = useState<Task[]>([]);
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [title, setTitle] = useState("");
@@ -25,12 +27,12 @@ const OverAllToDo: React.FC = () => {
     "Fritid",
     "Sundhed",
     "Hjemmet",
-  ]);
+  ]);// Foruddefinerede kategorier
   const [deadline, setDeadline] = useState("");
   const [priority, setPriority] = useState<Priority>("Medium");
   const [color, setColor] = useState("#FFCFDA"); // Default color
   const [filter, setFilter] = useState("Priority");
-
+ // Funktion til at tilføje en ny opgave
   const addTask = () => {
     if (!title || !deadline || (!category && !customCategory)) {
       alert("Please fill out all fields.");
@@ -48,15 +50,15 @@ const OverAllToDo: React.FC = () => {
       color,
       isCompleted: false,
     };
-
+   // Opdaterer task-listen og evt. tilføjer en ny kategori
     setTasks([...tasks, newTask]);
 
-    // Save the custom category for future use
+    
     if (customCategory && !categories.includes(customCategory)) {
       setCategories([...categories, customCategory]);
     }
-
-    // Reset form fields
+// Nulstiller formularfelter
+   
     setTitle("");
     setCategory("");
     setCustomCategory("");
@@ -65,11 +67,11 @@ const OverAllToDo: React.FC = () => {
     setColor("#FFC6D0");
     setIsFormVisible(false);
   };
-
+ // Funktion til at slette en opgave
   const deleteTask = (id: number) => {
     setTasks(tasks.filter((task) => task.id !== id));
   };
-
+// Funktion til at markere en opgave som fuldført
   const markComplete = (id: number) => {
     setTasks(
       tasks.map((task) =>
@@ -77,14 +79,14 @@ const OverAllToDo: React.FC = () => {
       )
     );
 
-    // Trigger confetti
+   // Trigger confetti-effekt
     confetti({
       particleCount: 100,
       spread: 70,
       origin: { y: 0.6 },
     });
   };
-
+// Sorteringsfunktion baseret på filtervalg
   const sortTasks = () => {
     const priorityOrder: Record<Priority, number> = {
       Høj: 1,
@@ -114,10 +116,11 @@ const OverAllToDo: React.FC = () => {
 
   return (
     <div className="OverAllToDo">
+      {/* Header med knap til at tilføje en ny opgave */}
       <div className="sectionone">
         <h1 className="h1OverAlle">Ekstra Mål</h1>
 
-        {/* Add Task Button */}
+        {/* Tilføj Task Button */}
         <button
           className="overall-add-task-button"
           onClick={() => setIsFormVisible(true)}
@@ -127,7 +130,7 @@ const OverAllToDo: React.FC = () => {
         </button>
       </div>
 
-      {/* Modal Form */}
+       {/* Modal form til tilføjelse af opgaver */}
       {isFormVisible && (
         <div className="overall-modal" role="dialog" aria-labelledby="modal-title">
           <div className="overall-modal-content">
@@ -213,7 +216,7 @@ const OverAllToDo: React.FC = () => {
         </div>
       )}
 
-      {/* Filter Box */}
+      {/* Filtreringsboks */}
       <div className="overall-filter-box">
         <label htmlFor="task-filter">Priotere efter</label>
         <select id="task-filter" value={filter} onChange={(e) => setFilter(e.target.value)}>
@@ -223,7 +226,7 @@ const OverAllToDo: React.FC = () => {
         </select>
       </div>
 
-      {/* Task List - Horizontal Scroll */}
+      {/*  Scroll */}
       <div className="overall-task-list" tabIndex={0} role="list">
         {filteredTasks.map((task) => (
           <div
@@ -238,7 +241,7 @@ const OverAllToDo: React.FC = () => {
     <p>{task.category}</p>
     <p>{task.deadline}</p>
     <p>{task.priority}</p>
-  </div>
+  </div> {/* Liste over opgaver */}
             <div className="overall-task-buttons">
               {!task.isCompleted && (
                 <button

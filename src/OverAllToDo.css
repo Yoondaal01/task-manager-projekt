@@ -1,4 +1,4 @@
-
+/* Overordnet stil for hele komponenten */
 .OverAllToDo{
   box-sizing: border-box;
   display: flex;
@@ -7,23 +7,14 @@
   padding-right: 50px;
   width: 100%;
 }
-.overall-add-task-button {
-  padding: 10px 20px;
-  margin: 20px;
-  font-size: 16px;
-  cursor: pointer;
-  background-color: #007bff00;
-  color: rgb(0, 0, 0);
-  border: 2px solid black;
-  border-radius: 5px;
-  
-}
+
+/* Sektion for overskrift og "Tilføj opgave"-knap */
 .sectionone{ display: flex;}
 
 .overall-add-task-button:hover {
   background-color: #c3c4c3;
 }
-
+/* Modal vindue til at tilføje opgaver */
 .overall-modal {
   position: fixed;
   top: 0;
@@ -69,6 +60,8 @@
   color: #000000;
 }
 
+/* Knapper i modal-vinduet */
+
 .overall-modal-buttons {
   display: flex;
   justify-content: space-between;
@@ -106,6 +99,8 @@
   background-color: #a71d2a;
 }
 
+/* Filtersektion til at sortere opgaver */
+
 .overall-filter-box {
   margin-bottom: 20px;
   padding: 10px;
@@ -127,12 +122,12 @@
   padding: 10px;
   border-radius: 10px;
 }
-
+/* Individuelle opgavekort */
 .overall-task-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex: 0 0 250px; /* Each task takes up fixed width */
+  flex: 0 0 250px; 
   border: 1px solid #ccc;
   padding: 10px;
   margin: 0;
@@ -140,9 +135,9 @@
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-/* Style the dropdown */
+/* style for dropdown */
 select {
-  appearance: none; /* Removes default styling */
+  appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
   border: 2px solid #000000;
@@ -161,7 +156,6 @@ select {
 
 
 
-/* Optional: Style options within the dropdown */
 select option {
   font-family: 'Futura', sans-serif;
   font-size: 16px;
@@ -177,8 +171,8 @@ select option {
 
 .overall-task-item p {
   margin: 10px 0;
-  padding-right: 10px; /* Space between text and button */
-  flex-grow: 1; /* Allow text to take up remaining space */
+  padding-right: 10px; 
+  flex-grow: 1; 
 }
 
 .overall-task-item button {
@@ -192,15 +186,24 @@ select option {
 
 
 
-/* Smooth scrolling for swipe effect */
+/* scrolling  */
 .overall-task-list {
   scroll-behavior: smooth;
   overflow-x: auto;
 }
 
-/* Other styles remain unchanged */
-
-
+/* Knapper på opgavekort */
+.overall-add-task-button {
+  padding: 10px 20px;
+  margin: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #007bff00;
+  color: rgb(0, 0, 0);
+  border: 2px solid black;
+  border-radius: 5px;
+  
+}
 
 .overall-task-buttons {
   display: flex;
@@ -229,11 +232,12 @@ select option {
 }
 
 .overall-task-item.completed {
-  background-color: #d4edda; /* Light green for completed tasks */
+  background-color: #d4edda; 
   border-color: #c3e6cb;
   opacity: 0.8;
 }
 
+/* Sektion for farvevælger */
 .overall-color-picker {
   margin-top: 10px;
 }
@@ -262,7 +266,7 @@ select option {
 }
 
 
-  /* General styles for smaller screens */
+  /* mindre skærme */
 @media (max-width: 900px) {
 
   .h1OverAlle{
@@ -275,7 +279,7 @@ select option {
   }
 
   .overall-modal-content {
-    width: 80%; /* Reduce width to fit smaller screens */
+    width: 80%; 
     padding: 40px;
     margin: 40px;
   }
@@ -284,7 +288,7 @@ select option {
   .overall-modal-content select,
   .overall-modal-content button,
   .overall-textarea {
-    font-size: 0.9rem; /* Reduce font size */
+    font-size: 0.9rem; 
     padding: 12px;
     margin: 8px;
   }
@@ -297,7 +301,7 @@ select option {
   .overall-task-item {
     display: flex;
     flex-direction: column;
-    flex: 0 0 150px; /* Adjust task card width */
+    flex: 0 0 150px;
     padding: 8px;
   }
 
@@ -311,7 +315,7 @@ select option {
   }
 
   .overall-modal-buttons button {
-    width: 48%; /* Make buttons fit side-by-side */
+    width: 48%; 
     font-size: 16px;
   }
 
@@ -324,11 +328,11 @@ select option {
   }
 
   .priority {
-    height: 30px; /* Adjust height for dropdowns */
+    height: 30px; 
   }
 
   .overall-color-swatch {
-    width: 30px; /* Smaller swatch size */
+    width: 30px; 
     height: 30px;
   }
 }
