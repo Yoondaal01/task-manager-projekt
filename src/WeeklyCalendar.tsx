@@ -222,6 +222,8 @@ const WeeklyCalendar: React.FC = () => {
             tasks={userData.tasks}
             closePanel={toggleFocusMode}
             currentDay={new Date()}
+            onDeleteTask={handleDeleteTask}
+            onToggleCompleteTask={handleToggleCompleteTask}
           />
         </div>
       )}

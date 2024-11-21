@@ -70,8 +70,8 @@ border: 0 !important;
     overflow-y: auto;
   }
   
-  .task-card {
-    background-color: #f7fbf2;
+  .task-card-focus {
+    max-width: 325px;
     border-radius: 22px;
     padding: 15px;
     margin-bottom: 10px;
@@ -116,4 +116,10 @@ border: 0 !important;
     font-size: 1rem;
   }
   
+  .task-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+
+  }
   

@@ -16,9 +16,17 @@ interface FocusModePanelProps {
   tasks: Task[];
   closePanel: () => void;
   currentDay: Date;
+  onDeleteTask: (taskId: number) => void;
+  onToggleCompleteTask: (taskId: number) => void;
 }
 
-const FocusModePanel: React.FC<FocusModePanelProps> = ({ tasks, closePanel, currentDay }) => {
+const FocusModePanel: React.FC<FocusModePanelProps> = ({
+  tasks,
+  closePanel,
+  currentDay,
+  onDeleteTask,
+  onToggleCompleteTask,
+}) => {
   const [filterOption, setFilterOption] = useState<string>('');
   const [searchCategory, setSearchCategory] = useState<string>('');
 
@@ -63,7 +71,9 @@ const FocusModePanel: React.FC<FocusModePanelProps> = ({ tasks, closePanel, curr
       <h2>Fokusmode: Dagens opgaver</h2>
 
       <div className="filter-sort-options">
-        <label htmlFor="filter-priority" className="visually-hidden">Filtrer efter prioritet</label>
+        <label htmlFor="filter-priority" className="visually-hidden">
+          Filtrer efter prioritet
+        </label>
         <select
           id="filter-priority"
           value={filterOption}
@@ -76,7 +86,9 @@ const FocusModePanel: React.FC<FocusModePanelProps> = ({ tasks, closePanel, curr
           <option value="høj">Høj</option>
         </select>
 
-        <label htmlFor="search-category" className="visually-hidden">Søg efter kategori</label>
+        <label htmlFor="search-category" className="visually-hidden">
+          Søg efter kategori
+        </label>
         <input
           id="search-category"
           type="text"
@@ -91,7 +103,7 @@ const FocusModePanel: React.FC<FocusModePanelProps> = ({ tasks, closePanel, curr
         {todayTasks.map((task) => (
           <div
             key={task.id}
-            className={`task-card ${task.color}`}
+            className={`task-card-focus ${task.color}`}
             tabIndex={0}
             aria-label={`Opgave: ${task.title}, Kategori: ${task.category}, Prioritet: ${task.priority}`}
           >
@@ -99,6 +111,30 @@ const FocusModePanel: React.FC<FocusModePanelProps> = ({ tasks, closePanel, curr
             <p>Kategori: {task.category}</p>
             <p>Prioritet: {task.priority}</p>
             {task.time && <p>Tid: {task.time}</p>}
+
+            <div className="task-actions" style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
+              <button
+                className="task-delete"
+                onClick={() => onDeleteTask(task.id)}
+                aria-label={`Slet opgave: ${task.title}`}
+              >
+                <img src="src/assets/delete-button.png" alt="Slet" />
+              </button>
+              <button
+                className="task-complete"
+                onClick={() => onToggleCompleteTask(task.id)}
+                aria-label={`Markér opgave som ${task.isComplete ? 'ikke fuldført' : 'fuldført'}: ${task.title}`}
+              >
+                <img
+                  src={
+                    task.isComplete
+                      ? 'src/assets/done-button-active.png'
+                      : 'src/assets/done-button-not-active.png'
+                  }
+                  alt={task.isComplete ? 'Fuldført' : 'Ikke fuldført'}
+                />
+              </button>
+            </div>
           </div>
         ))}
       </div>
