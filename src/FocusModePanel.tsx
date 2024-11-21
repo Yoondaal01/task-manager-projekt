@@ -30,24 +30,24 @@ const FocusModePanel: React.FC<FocusModePanelProps> = ({
   const [filterOption, setFilterOption] = useState<string>('');
   const [searchCategory, setSearchCategory] = useState<string>('');
 
-  // Get today's tasks
+  // today's tasks
   let todayTasks = tasks.filter(
     (task) => new Date(task.date).toDateString() === currentDay.toDateString()
   );
 
-  // Apply filtering by priority
+  //  filtering by priority
   if (filterOption) {
     todayTasks = todayTasks.filter((task) => task.priority === filterOption);
   }
 
-  // Apply search filter by category
+  //  search filter by category
   if (searchCategory) {
     todayTasks = todayTasks.filter((task) =>
       task.category.toLowerCase().includes(searchCategory.toLowerCase())
     );
   }
 
-  // Handle keyboard accessibility for closing the panel
+  //  keyboard accessibility for closing the panel
   const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
     if (event.key === 'Enter' || event.key === ' ') {
       closePanel();
@@ -63,7 +63,7 @@ const FocusModePanel: React.FC<FocusModePanelProps> = ({
         aria-label="Luk panel"
       >
         <img
-          src="src/assets/close-icon.png" // Replace with the actual path to your icon
+          src="src/assets/close-icon.png" 
           alt="Luk"
           className="close-icon"
         />

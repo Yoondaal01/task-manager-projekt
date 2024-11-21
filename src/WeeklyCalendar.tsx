@@ -46,7 +46,7 @@ const WeeklyCalendar: React.FC = () => {
   // Function to handle adding a new task
   const handleAddTaskButtonClick = (date: string, event: React.MouseEvent<HTMLDivElement>) => {
     setSelectedTask({
-      id: Date.now(),
+      id: Date.now(), // Generate a unique ID
       title: '',
       category: '',
       priority: 'lav',
