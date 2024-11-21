@@ -28,6 +28,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
 }) => {
   return (
     <div className="task-card" role="form" aria-labelledby="task-card-title">
+      {/* Close icon to delete the task */}
       <img
         src="src/assets/close-icon.png" // Replace with the actual path to your PNG image
         alt="Luk"
@@ -39,6 +40,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
       />
       <h2 id="task-card-title">Tilføj Task</h2>
       <div className="task-card-content">
+        {/* Input field for the task title */}
         <div className="task-field">
           <label htmlFor="task-title">Titel</label>
           <input
@@ -49,6 +51,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
             aria-required="true"
           />
         </div>
+        {/* Input field for the task category */}
         <div className="task-field">
           <label htmlFor="task-category">Kategori</label>
           <input
@@ -59,6 +62,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
             aria-required="true"
           />
         </div>
+        {/* Input field for the task date */}
         <div className="task-field">
           <label htmlFor="task-date">Dato</label>
           <input
@@ -69,6 +73,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
             aria-required="true"
           />
         </div>
+        {/* Input field for the task time (optional) */}
         <div className="task-field">
           <label htmlFor="task-time">Tid</label>
           <input
@@ -78,6 +83,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
             onChange={(e) => onChange('time', e.target.value)}
           />
         </div>
+        {/* Dropdown to select the task priority */}
         <div className="task-field">
           <label htmlFor="task-priority">Prioritering</label>
           <select
@@ -91,10 +97,11 @@ const TaskCard: React.FC<TaskCardProps> = ({
             <option value="høj">Høj</option>
           </select>
         </div>
+        {/* Color picker to select the task color */}
         <div className="task-field">
           <label>Vælg Farve</label>
           <div className="color-circle-container" style={{ display: 'flex', gap: '10px' }}>
-            {['pink', 'coral', 'lavender', 'teal', 'yellow', 'mint'].map(
+            {["pink", "coral", "lavender", "teal", "yellow", "mint"].map(
               (colorOption) => (
                 <div
                   key={colorOption}
@@ -111,6 +118,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
           </div>
         </div>
       </div>
+      {/* Action buttons for adding or canceling the task */}
       <div className="task-actions">
         <button className='add-button' onClick={onComplete} aria-label="Tilføj opgave">Tilføj</button>
         <button className='close-button' onClick={onDelete} aria-label="Annuller opgave">Annuller</button>
