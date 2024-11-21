@@ -6,6 +6,7 @@ interface UserData {
   tasks: Task[];
 }
 
+// Define a TypeScript interface for a task
 interface Task {
   id: number;
   title: string;
@@ -17,37 +18,41 @@ interface Task {
   isComplete: boolean;
 }
 
-
 // Define the context value type
 interface UserContextProps {
   userData: UserData;
   setUserData: React.Dispatch<React.SetStateAction<UserData>>;
 }
 
+// Define the props for the UserProvider component
 interface UserProviderProps {
   children: ReactNode;
 }
 
-// Create a new context
+// Create a new context for user data
 const UserContext = createContext<UserContextProps | undefined>(undefined);
 
-// Provider component
+// Provider component that wraps the application or part of it to provide user data context
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
+  // State to manage user data, initialized with default values
   const [userData, setUserData] = useState<UserData>({
     name: 'Sara',
     tasks: [],
   });
 
   return (
+    // Provide the user data and the function to update it to the context consumers
     <UserContext.Provider value={{ userData, setUserData }}>
       {children}
     </UserContext.Provider>
   );
 };
 
-// Hook to use the UserContext
+// Custom hook to use the UserContext in functional components
 export const useUser = () => {
+  // Access the UserContext value
   const context = useContext(UserContext);
+  // Throw an error if the hook is used outside of a UserProvider
   if (!context) {
     throw new Error('useUser must be used within a UserProvider');
   }

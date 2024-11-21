@@ -27,27 +27,29 @@ const FocusModePanel: React.FC<FocusModePanelProps> = ({
   onDeleteTask,
   onToggleCompleteTask,
 }) => {
+  // State to keep track of the selected priority filter option
   const [filterOption, setFilterOption] = useState<string>('');
+  // State to keep track of the search category input
   const [searchCategory, setSearchCategory] = useState<string>('');
 
-  // today's tasks
+  // Filter the tasks for today only
   let todayTasks = tasks.filter(
     (task) => new Date(task.date).toDateString() === currentDay.toDateString()
   );
 
-  //  filtering by priority
+  // Apply priority filter if a filter option is selected
   if (filterOption) {
     todayTasks = todayTasks.filter((task) => task.priority === filterOption);
   }
 
-  //  search filter by category
+  // Apply search filter for category if a search term is entered
   if (searchCategory) {
     todayTasks = todayTasks.filter((task) =>
       task.category.toLowerCase().includes(searchCategory.toLowerCase())
     );
   }
 
-  //  keyboard accessibility for closing the panel
+  // Handle keyboard event for accessibility when closing the panel
   const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
     if (event.key === 'Enter' || event.key === ' ') {
       closePanel();
@@ -56,6 +58,7 @@ const FocusModePanel: React.FC<FocusModePanelProps> = ({
 
   return (
     <div className="focus-mode-panel">
+      {/* Close button for the panel */}
       <button
         className="close-panel-button"
         onClick={closePanel}
@@ -71,6 +74,7 @@ const FocusModePanel: React.FC<FocusModePanelProps> = ({
       <h2>Fokusmode: Dagens opgaver</h2>
 
       <div className="filter-sort-options">
+        {/* Dropdown to filter tasks by priority */}
         <label htmlFor="filter-priority" className="visually-hidden">
           Filtrer efter prioritet
         </label>
@@ -86,6 +90,7 @@ const FocusModePanel: React.FC<FocusModePanelProps> = ({
           <option value="høj">Høj</option>
         </select>
 
+        {/* Input to search tasks by category */}
         <label htmlFor="search-category" className="visually-hidden">
           Søg efter kategori
         </label>
@@ -99,6 +104,7 @@ const FocusModePanel: React.FC<FocusModePanelProps> = ({
         />
       </div>
 
+      {/* Display the list of tasks for today */}
       <div className="tasks-list">
         {todayTasks.map((task) => (
           <div
@@ -110,8 +116,10 @@ const FocusModePanel: React.FC<FocusModePanelProps> = ({
             <h3>{task.title}</h3>
             <p>Kategori: {task.category}</p>
             <p>Prioritet: {task.priority}</p>
+            {/* Display the task time if available */}
             {task.time && <p>Tid: {task.time}</p>}
 
+            {/* Task action buttons: delete and mark complete/incomplete */}
             <div className="task-actions" style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
               <button
                 className="task-delete"

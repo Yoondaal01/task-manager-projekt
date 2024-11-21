@@ -16,14 +16,22 @@ interface Task {
 }
 
 const WeeklyCalendar: React.FC = () => {
+  // State to control overlay visibility
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
+  // Access user data from the context
   const { userData, setUserData } = useUser();
+  // State to control focus mode visibility
   const [isFocusModeOpen, setIsFocusModeOpen] = useState(false);
+  // State to keep track of week offset (for navigating through weeks)
   const [weekOffset, setWeekOffset] = useState(0);
+  // State to store the currently selected task
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+  // State to control modal visibility
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // State to store the modal's position on the screen
   const [modalPosition, setModalPosition] = useState<{ top: number; left: number } | null>(null);
 
+  // Array to store the names of the week days
   const weekDays = ['MAN.', 'TIRS.', 'ONS.', 'TOR.', 'FRE.', 'LØR.', 'SØN.'];
 
   // Get current week dates
@@ -45,8 +53,9 @@ const WeeklyCalendar: React.FC = () => {
 
   // Function to handle adding a new task
   const handleAddTaskButtonClick = (date: string, event: React.MouseEvent<HTMLDivElement>) => {
+    // Set default values for the new task
     setSelectedTask({
-      id: Date.now(), // Generate a unique ID
+      id: Date.now(),
       title: '',
       category: '',
       priority: 'lav',
@@ -55,6 +64,7 @@ const WeeklyCalendar: React.FC = () => {
       time: '',
       isComplete: false,
     });
+    // Calculate the modal position based on the clicked element's position
     const rect = event.currentTarget.parentElement?.getBoundingClientRect();
     if (rect) {
       setModalPosition({ top: rect.top + window.scrollY, left: rect.right + window.scrollX + 10 });
@@ -65,6 +75,7 @@ const WeeklyCalendar: React.FC = () => {
   // Function to handle clicking on an existing task
   const handleTaskClick = (task: Task, event: React.MouseEvent<HTMLDivElement>) => {
     setSelectedTask(task);
+    // Calculate the modal position based on the clicked element's position
     const rect = event.currentTarget.parentElement?.getBoundingClientRect();
     if (rect) {
       setModalPosition({ top: rect.top + window.scrollY, left: rect.right + window.scrollX + 10 });
@@ -72,7 +83,7 @@ const WeeklyCalendar: React.FC = () => {
     setIsModalOpen(true);
   };
 
-  // Function to handle task submission
+  // Function to handle task submission (adding or updating a task)
   const handleTaskSubmit = () => {
     if (selectedTask) {
       setUserData({
@@ -118,7 +129,7 @@ const WeeklyCalendar: React.FC = () => {
     <div className="weekly-calendar-container">
       {isOverlayVisible && <div className="overlay" aria-hidden="true"></div>}
       
-      {/* Move the Focus Mode button right after the navbar */}
+      {/* Focus Mode button to toggle focus mode */}
       <div className="focus-mode-button-container">
         <button
           className="focus-mode-button"
@@ -129,6 +140,7 @@ const WeeklyCalendar: React.FC = () => {
         </button>
       </div>
 
+      {/* Week navigation controls */}
       <div className="week-navigation">
         <button
           className="week-arrow"
@@ -149,6 +161,7 @@ const WeeklyCalendar: React.FC = () => {
         </button>
       </div>
 
+      {/* Weekly calendar layout */}
       <div className="weekly-calendar-wrapper">
         <div className="weekly-calendar">
           {weekDates.map((date, index) => (
@@ -175,10 +188,10 @@ const WeeklyCalendar: React.FC = () => {
                       aria-label={`Opgave: ${task.title}, Kategori: ${task.category}, Prioritet: ${task.priority}`}
                       style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
                       onKeyDown={(e) => {
-  if (e.key === 'Enter' || e.key === ' ') {
-    handleTaskClick(task, e as unknown as React.MouseEvent<HTMLDivElement>);
-  }
-}}
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          handleTaskClick(task, e as unknown as React.MouseEvent<HTMLDivElement>);
+                        }
+                      }}
                     >
                       <div>
                         {task.time ? <small className="task-time">{task.time}</small> : null}
@@ -207,6 +220,7 @@ const WeeklyCalendar: React.FC = () => {
                     </div>
                   ))}
               </div>
+              {/* Add task button */}
               <div className="add-task-button" onClick={(e) => handleAddTaskButtonClick(date.toISOString().split('T')[0], e)}>
                 <img src="src/assets/add-task-icon.png" alt="Tilføj Opgave" className="add-task-icon" />
                 <p>Tilføj Task</p>
@@ -216,6 +230,7 @@ const WeeklyCalendar: React.FC = () => {
         </div>
       </div>
 
+      {/* Focus Mode panel */}
       {isFocusModeOpen && (
         <div className="focus-mode-panel-wrapper">
           <FocusModePanel
@@ -228,6 +243,7 @@ const WeeklyCalendar: React.FC = () => {
         </div>
       )}
 
+      {/* Task card modal for adding or editing a task */}
       {isModalOpen && modalPosition && selectedTask && (
         <div
           className="modal-overlay"
